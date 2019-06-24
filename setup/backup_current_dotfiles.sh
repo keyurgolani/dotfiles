@@ -1,0 +1,1 @@
+mv ~/.zshrc ~/.zshrc.backup
