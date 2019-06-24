@@ -4,4 +4,4 @@ git pull --rebase
 git stash pop
 cd -
 
-for f in ~/.dotfiles/dotfiles/*; do source $f; done
+for f in ~/.dotfiles/dotfiles/*.import; do source $f; done
