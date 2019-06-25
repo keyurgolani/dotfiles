@@ -8,8 +8,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyurgolani/dotfiles/maste
 
 ## TODO
 - [ ] Gain and persist `sudo` access
-- [ ] Ask for optional installs
+- [x] Ask for optional installs
 - [ ] Make installation process less verbose
+- [ ] Add ability to enable verbose installation using `-v` flag
 - [ ] Add dotfiles_overrides folder
 - [ ] Add shell functions and aliases
 - [ ] Add git configuration
