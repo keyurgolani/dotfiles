@@ -1,3 +1,5 @@
+#!/bin/bash
+
 print_usage() {
     printf "Usage: install.sh [-i ALL|NONE]"
 }
@@ -30,7 +32,15 @@ if [ -d "$DIRECTORY" ]; then
     exit 1
 fi
 
-git clone https://github.com/keyurgolani/dotfiles.git $DIRECTORY
+echo "Checking out dotfiles..."
+
+set echo off
+
+{
+    git clone https://github.com/keyurgolani/dotfiles.git $DIRECTORY
+} &> /dev/null
+
+set echo on
 
 if [ -n "$INSTALL" ]; then
     include $DIRECTORY/setup/bootstrap.sh -i $INSTALL

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 print_usage() {
     printf "Usage: bootstrap.sh [-i ALL|NONE]"
 }
@@ -29,13 +31,16 @@ include () {
 ask_and_include () {
     if [ -n "$INSTALL" ]; then
         if [[ $INSTALL == "ALL" ]]; then
-            include $2
+            echo "Installing $1"
+            set echo off
+            include $2 &> /dev/null
+            set echo on
         fi
     else
         while true; do
             read -p "Do you wish to install $1? " yn
             case $yn in
-                [Yy]* ) include $2; break;;
+                [Yy]* ) echo "Installing $1"; set echo off; include $2 &> /dev/null; set echo on; break;;
                 [Nn]* ) break;;
                 * ) echo "Please answer yes or no.";;
             esac
