@@ -32,17 +32,27 @@ ask_and_include () {
     if [ -n "$INSTALL" ]; then
         if [[ $INSTALL == "ALL" ]]; then
             echo "Installing $1"
-            set echo off
-            include $2 &> /dev/null
-            set echo on
+            {
+                include $2 
+            } &> /dev/null
         fi
     else
         while true; do
             read -p "Do you wish to install $1? " yn
             case $yn in
-                [Yy]* ) echo "Installing $1"; set echo off; include $2 &> /dev/null; set echo on; break;;
-                [Nn]* ) break;;
-                * ) echo "Please answer yes or no.";;
+                [Yy]* ) 
+                    echo "Installing $1"
+                    {
+                        include $2
+                    } &> /dev/null
+                    break
+                    ;;
+                [Nn]* ) 
+                    break
+                    ;;
+                * ) 
+                    echo "Please answer yes or no."
+                    ;;
             esac
         done
     fi
