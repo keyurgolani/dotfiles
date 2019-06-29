@@ -50,3 +50,4 @@ ask_and_include "Rocket Emojis" $DIRECTORY/setup/installs/rocket.sh
 ask_and_include "VMWare Fusion" $DIRECTORY/setup/installs/vmware_fusion.sh
 ask_and_include "Insync" $DIRECTORY/setup/installs/insync.sh
 ask_and_include "The Fuck" $DIRECTORY/setup/installs/thefuck.sh
+ask_and_include "Pock.Dev" $DIRECTORY/setup/installs/pock.sh
