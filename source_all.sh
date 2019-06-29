@@ -10,8 +10,15 @@ set echo off
     git pull --rebase
     git stash pop
     cd -
+
 } &> /dev/null
 
 set echo on
 
-for f in ~/.dotfiles/dotfiles/*.import; do source $f; done
+include () {
+    [[ -f "$1" ]] && source "$1"
+}
+
+export DIRECTORY=~/.dotfiles
+
+for f in $DIRECTORY/dotfiles/*.import; do include $f; done
