@@ -51,4 +51,5 @@ ask_and_include "VMWare Fusion" $DIRECTORY/setup/installs/vmware_fusion.sh
 ask_and_include "Insync" $DIRECTORY/setup/installs/insync.sh
 ask_and_include "The Fuck" $DIRECTORY/setup/installs/thefuck.sh
 ask_and_include "Pock.Dev" $DIRECTORY/setup/installs/pock.sh
-ask_and_include "VSCode Extensions" $DIRECTORY/setup/installs/vscode_extension.sh.sh
+ask_and_include "VSCode Extensions" $DIRECTORY/setup/installs/vscode_extension.sh
+ask_and_include "Mozilla Firefox" $DIRECTORY/setup/installs/firefox.sh
