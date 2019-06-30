@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 print_usage() {
     printf "Usage: install.sh [-i ALL|NONE]"

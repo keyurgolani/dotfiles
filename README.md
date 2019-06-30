@@ -15,6 +15,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyurgolani/dotfiles/maste
 - [ ] Add shell functions and aliases
 - [ ] Add git configuration
 - [ ] Add VSCode configuration
+- [x] Add VSCode extensions
 - [ ] Add IntelliJ configuration
 - [ ] Add Tmuxinator Sessions
 - [ ] Add vim configuration

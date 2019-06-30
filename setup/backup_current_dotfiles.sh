@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "Backing up current dotfiles configurations (if any)..."
 

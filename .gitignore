@@ -1,3 +1,9 @@
+### Idea ###
+# General
+.idea
+### End Idea ###
+
+
 ### Zsh ###
 # General
 *.zwc

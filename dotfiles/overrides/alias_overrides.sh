@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -68,7 +68,7 @@ alias u="sudo softwareupdate --install --all \
             && npm install -g npm \
             && npm update -g"
 
-#!/bin/bash
+#!/usr/bin/env bash
 
 alias ..="cd .."
 alias ...="cd ../.."
