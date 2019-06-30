@@ -13,6 +13,7 @@ set echo off
     export CPPFLAGS="-I/usr/local/opt/ruby/include"
     brew install autojump
     brew install tmux
+    brew install go
     brew install tmux-xpanes
     gem install tmuxinator
     brew install tmuxinator-completion
