@@ -12,6 +12,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyurgolani/dotfiles/maste
 - [x] Make installation process less verbose
 - [ ] Add ability to enable verbose installation using `-v` flag
 - [x] Add dotfiles_overrides folder
+- [ ] Add Hold CMD + Q to quit for mac
 - [ ] Add shell functions and aliases
 - [ ] Add git configuration
 - [ ] Add VSCode configuration
