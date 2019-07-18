@@ -21,8 +21,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyurgolani/dotfiles/maste
 - [ ] Add Tmuxinator Sessions
 - [ ] Add vim configuration
 - [ ] Add MacOS configuration
-- [ ] Add essential applications installation
-- [ ] Add git log beautification
+- [x] Add essential applications installation
+- [ ] Add option for "Yes" / "No" / "Yes For All" / "No For All" options
+- [x] Add git log beautification
 - [ ] Add an uninstall script
 - [ ] Add other OSes
 - [ ] And More...!
