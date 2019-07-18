@@ -95,4 +95,6 @@ alias y="yarn"
 
 
 alias sshdev="ssh clouddesk"
-alias sourceall="source ~/.bashrc"
+alias sourceall="source ~/.zshrc"
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

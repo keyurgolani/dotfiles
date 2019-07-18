@@ -20,6 +20,7 @@ set echo off
     brew install python
     brew install mas
     pip3 install virtualenvwrapper
+    brew install icdiff     # Reference: https://www.jefftk.com/icdiff
 } &> /dev/null
 
 set echo on

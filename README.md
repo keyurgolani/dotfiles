@@ -14,7 +14,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyurgolani/dotfiles/maste
 - [x] Add dotfiles_overrides folder
 - [x] Add Hold CMD + Q to quit for mac
 - [ ] Add shell functions and aliases
-- [ ] Add git configuration
+- [x] Add git configuration
 - [ ] Add VSCode configuration
 - [x] Add VSCode extensions
 - [ ] Add IntelliJ configuration
