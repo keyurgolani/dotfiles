@@ -14,6 +14,7 @@ set echo off
     brew install autojump
     brew install tmux
     brew install go
+    brew install apache2
     brew install tmux-xpanes
     gem install tmuxinator
     brew install tmuxinator-completion
@@ -21,6 +22,7 @@ set echo off
     brew install mas
     pip3 install virtualenvwrapper
     brew install icdiff     # Reference: https://www.jefftk.com/icdiff
+    brew install interactive-rebase-tool        # https://gitrebasetool.mitmaro.ca/
 } &> /dev/null
 
 set echo on

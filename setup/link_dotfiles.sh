@@ -22,5 +22,7 @@ read -p "Full Name for Git: " git_name
 git config --global user.name "$git_name"
 read -p "Email for Git: " git_email
 git config --global user.email "$git_email"
+read -p "Username for Git: " git_username
+git config --global user.username "$git_username"
 # TODO: Generate GPG Sign and add `user.signingkey` to config
 git config --global include.path "config_overrides/git.config"
