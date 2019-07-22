@@ -15,6 +15,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyurgolani/dotfiles/maste
 - [x] Add Hold CMD + Q to quit for mac
 - [ ] Add shell functions and aliases
 - [x] Add git configuration
+- [ ] Make gitignore file more rich --> Refer: https://github.com/github/gitignore
 - [ ] Add VSCode configuration
 - [x] Add VSCode extensions
 - [ ] Add IntelliJ configuration

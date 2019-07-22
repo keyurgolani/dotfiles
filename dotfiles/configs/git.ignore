@@ -36,3 +36,9 @@ Icon?
 Thumbs.db
 
 *.lock
+
+# IDE Configurations #
+######################
+
+.idea
+# TODO: Add more common gitignore configs from https://github.com/github/gitignore
