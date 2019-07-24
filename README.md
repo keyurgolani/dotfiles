@@ -24,6 +24,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyurgolani/dotfiles/maste
 - [ ] Add MacOS configuration
 - [x] Add essential applications installation
 - [ ] Add option for "Yes" / "No" / "Yes For All" / "No For All" options
+- [x] Add EditorConfig file for the code style consistency.
 - [x] Add git log beautification
 - [ ] Add an uninstall script
 - [ ] Add other OSes
