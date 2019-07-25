@@ -6,6 +6,7 @@ set echo off
 
 {
     xcode-select --install
+    PROD=$(softwareupdate -l | grep "\*.*Command Line.*$(sw_vers -productVersion | awk -F. '{print $1"."$2}')" | head -n 1 | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     brew install ruby
     export PATH="/usr/local/opt/ruby/bin:$PATH"
@@ -21,8 +22,8 @@ set echo off
     brew install python
     brew install mas
     pip3 install virtualenvwrapper
-    brew install icdiff     # Reference: https://www.jefftk.com/icdiff
-    brew install interactive-rebase-tool        # https://gitrebasetool.mitmaro.ca/
-} &> /dev/null
+    brew install icdiff                  # Reference: https://www.jefftk.com/icdiff
+    brew install interactive-rebase-tool # https://gitrebasetool.mitmaro.ca/
+} &>/dev/null
 
 set echo on
