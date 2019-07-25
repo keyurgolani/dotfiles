@@ -7,11 +7,12 @@
 *.o
 *.so
 
+
 # Temporary files #
 ###################
-*.swp
-*.swo
+*.sw[a-z]
 *~
+
 
 # Packages #
 ############
@@ -24,9 +25,11 @@
 *.tar
 *.zip
 
+
 # Logs #
 ######################
 *.log
+
 
 # OS generated files #
 ######################
@@ -34,11 +37,33 @@
 ehthumbs.db
 Icon?
 Thumbs.db
+._*
+.AppleDouble
+.localized
+.LSOverride
+.Spotlight-V100
+.Trashes
 
 *.lock
+
+Desktop.ini
+ehthumbs.db
+Thumbs.db
+
 
 # IDE Configurations #
 ######################
 
 .idea
+%*
+*.un~
+.netrwhist
+Session.vim
 # TODO: Add more common gitignore configs from https://github.com/github/gitignore
+
+
+# Node.js & npm. #
+######################
+
+node_modules
+npm-debug.log
