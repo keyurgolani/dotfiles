@@ -58,6 +58,16 @@ ask_and_include () {
     fi
 }
 
+execute() {
+
+    echo "Setting $2"
+
+    eval "$1" \
+        &> /dev/null
+
+}
+
+
 export DIRECTORY=~/.dotfiles
 
 #################################
@@ -75,5 +85,10 @@ include $DIRECTORY/setup/install_homebrew.sh
 include $DIRECTORY/setup/install_zsh.sh
 include $DIRECTORY/setup/backup_current_dotfiles.sh
 include $DIRECTORY/setup/link_dotfiles.sh
+include $DIRECTORY/setup/install_preferences.sh
 include $DIRECTORY/setup/install_essentials.sh
+include $DIRECTORY/setup/install_binaries.sh
 include $DIRECTORY/setup/install_things.sh
+include $DIRECTORY/setup/cleanup.sh
+
+sudo shutdown -r now &> /dev/null
