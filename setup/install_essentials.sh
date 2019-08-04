@@ -13,7 +13,9 @@ set echo off
     export LDFLAGS="-L/usr/local/opt/ruby/lib"
     export CPPFLAGS="-I/usr/local/opt/ruby/include"
     brew install autojump
+    brew install vim --with-override-system-vi
     brew install tmux
+    brew install reattach-to-user-namespace
     brew install go
     brew install apache2
     brew install tmux-xpanes

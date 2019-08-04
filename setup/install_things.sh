@@ -55,3 +55,5 @@ ask_and_include "VSCode Extensions" $DIRECTORY/setup/installs/vscode_extension.s
 ask_and_include "Mozilla Firefox" $DIRECTORY/setup/installs/firefox.sh
 ask_and_include "Slow Quit Apps" $DIRECTORY/setup/installs/slow_quit_apps.sh
 ask_and_include "Android Messages" $DIRECTORY/setup/installs/android_messages.sh
+ask_and_include "GPG" $DIRECTORY/setup/installs/gpg.sh
+ask_and_include "LICEcap" $DIRECTORY/setup/installs/licecap.sh
