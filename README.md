@@ -15,13 +15,16 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyurgolani/dotfiles/maste
 - [x] Add Hold CMD + Q to quit for mac
 - [ ] Add shell functions and aliases
 - [x] Add git configuration
+- [ ] Add Unsplas Wallpaper install
+- [ ] Add a default wallpaper
+- [ ] Add a terminal profile for iterm
 - [ ] Make gitignore file more rich --> Refer: https://github.com/github/gitignore
 - [ ] Add VSCode configuration
 - [x] Add VSCode extensions
 - [ ] Add IntelliJ configuration
 - [ ] Add Tmuxinator Sessions
 - [ ] Add vim configuration
-- [ ] Add MacOS configuration
+- [x] Add MacOS configuration
 - [x] Add essential applications installation
 - [ ] Add option for "Yes" / "No" / "Yes For All" / "No For All" options
 - [x] Add EditorConfig file for the code style consistency.
