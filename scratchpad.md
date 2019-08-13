@@ -77,3 +77,11 @@ function load_color()
 
 
 ```
+
+### Preferences
+
+```
+Skip mandatory microsoft account login step requirement from OneNote.
+sudo /usr/bin/defaults write /Library/Preferences/com.microsoft.onenote.mac.plist FirstRunExperienceCompletedO15 -bool true
+sudo /usr/bin/defaults write /Library/Preferences/com.microsoft.onenote.mac.plist kSubUIAppCompletedFirstRunSetup1507 -bool true
+```
