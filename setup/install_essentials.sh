@@ -8,7 +8,7 @@ export LDFLAGS="-L/usr/local/opt/ruby/lib"
 export CPPFLAGS="-I/usr/local/opt/ruby/include"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 brew install autojump
-brew install vim --with-override-system-vi
+brew install vim -- --with-override-system-vi
 brew install tmux
 brew install reattach-to-user-namespace
 brew install go
