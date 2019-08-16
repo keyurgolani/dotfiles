@@ -81,6 +81,7 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 
+include $DIRECTORY/setup/install_developer_tools.sh
 include $DIRECTORY/setup/install_homebrew.sh
 include $DIRECTORY/setup/install_zsh.sh
 include $DIRECTORY/setup/backup_current_dotfiles.sh

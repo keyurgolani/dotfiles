@@ -92,12 +92,25 @@ execute "defaults write com.apple.dock showhidden -bool true" \
 execute "defaults write com.apple.dock tilesize -int 60" \
     "Set icon size"
 
+execute "defaults write com.apple.dock autohide-time-modifier -float 0" \
+    "Remove Dock show delay"
+
+execute "defaults write com.apple.dock orientation right" \
+    "Place Dock on the right side of screen"
+
 killall "Dock" &> /dev/null
 
 
 #############################
 # Finder Preferences
 #############################
+
+execute "defaults write NSGlobalDomain AppleShowAllExtensions -bool true" \
+    "Show all file extensions in Finder"
+
+execute "defaults write com.apple.finder AppleShowAllFiles YES" \
+    "Show hidden files in Finder"
+
 execute "defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true && \
          defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true && \
          defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true" \
