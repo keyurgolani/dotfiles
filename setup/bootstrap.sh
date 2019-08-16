@@ -32,9 +32,7 @@ ask_and_include () {
     if [ -n "$INSTALL" ]; then
         if [[ $INSTALL == "ALL" ]]; then
             echo "Installing $1"
-            {
-                include $2 
-            } &> /dev/null
+            include $2
         fi
     else
         while true; do
@@ -42,9 +40,7 @@ ask_and_include () {
             case $yn in
                 [Yy]* ) 
                     echo "Installing $1"
-                    {
-                        include $2
-                    } &> /dev/null
+                    include $2
                     break
                     ;;
                 [Nn]* ) 
@@ -59,12 +55,8 @@ ask_and_include () {
 }
 
 execute() {
-
     echo "Setting $2"
-
-    eval "$1" \
-        &> /dev/null
-
+    eval "$1"
 }
 
 

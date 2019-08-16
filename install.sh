@@ -34,13 +34,7 @@ fi
 
 echo "Checking out dotfiles..."
 
-set echo off
-
-{
-    git clone https://github.com/keyurgolani/dotfiles.git $DIRECTORY
-} &> /dev/null
-
-set echo on
+git clone https://github.com/keyurgolani/dotfiles.git $DIRECTORY
 
 if [ -n "$INSTALL" ]; then
     include $DIRECTORY/setup/bootstrap.sh -i $INSTALL

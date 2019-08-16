@@ -2,18 +2,11 @@
 
 echo "Updating dotfiles..."
 
-set echo off
-
-{
-    cd ~/.dotfiles
-    git stash
-    git pull --rebase
-    git stash pop
-    cd -
-
-} &> /dev/null
-
-set echo on
+cd ~/.dotfiles
+git stash
+git pull --rebase
+git stash pop
+cd -
 
 include () {
     [[ -f "$1" ]] && source "$1"
