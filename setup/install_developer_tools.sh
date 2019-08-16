@@ -1,5 +1,4 @@
-mkdir ~/.ssh
-ssh-keygen -f ~/.ssh/id_rsa -t rsa -N ''
+yes y | ssh-keygen -f ~/.ssh/id_rsa -q -t rsa -N '' > /dev/null
 
 touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
 PROD=$(softwareupdate -l |
