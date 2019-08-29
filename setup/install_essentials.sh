@@ -18,6 +18,8 @@ gem install tmuxinator
 brew install tmuxinator-completion
 brew install python
 brew install mas
+brew install tldr
+brew install https://raw.github.com/gleitz/howdoi/master/howdoi.rb  # Reference: https://github.com/gleitz/howdoi
 pip3 install virtualenvwrapper
 brew install icdiff                  # Reference: https://www.jefftk.com/icdiff
 brew install interactive-rebase-tool # https://gitrebasetool.mitmaro.ca/

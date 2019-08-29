@@ -108,6 +108,9 @@ fi
 
 source /usr/local/share/antigen/antigen.zsh
 
+antigen use oh-my-zsh
+antigen theme bhilburn/powerlevel9k powerlevel9k
+
 POWERLEVEL9K_INSTALLATION_PATH=$ANTIGEN_BUNDLES/bhilburn/powerlevel9k
 
 POWERLEVEL9K_CUSTOM_WIFI_SIGNAL="zsh_wifi_signal"
@@ -149,11 +152,16 @@ POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='yellow'
 POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon root_indicator context battery dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time dir_writable)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time root_indicator status time dir_writable)
 
 #POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+POWERLEVEL9K_MODE="nerdfont-complete"
+#POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX=" $  " # For $ > prefix
+#POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{014}\u2570%F{cyan}\uF460%F{073}\uF460%F{109}\uF460%f " # For >>> prefix
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) " # For a green or red ➜ depending on previous command run success result
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
 
-POWERLEVEL9K_TIME_FORMAT="%D{\uf017 %H:%M \uf073 %d/%m/%y}"
+POWERLEVEL9K_TIME_FORMAT="%D{%d/%m/%y \uf073 %H:%M}"
 POWERLEVEL9K_TIME_BACKGROUND='white'
 POWERLEVEL9K_RAM_BACKGROUND='yellow'
 POWERLEVEL9K_LOAD_CRITICAL_BACKGROUND="white"
@@ -171,6 +179,20 @@ POWERLEVEL9K_LOAD_NORMAL_VISUAL_IDENTIFIER_COLOR="green"
 POWERLEVEL9K_STATUS_VERBOSE=true
 POWERLEVEL9K_STATUS_CROSS=true
 
-antigen theme bhilburn/powerlevel9k powerlevel9k
+# This block doesn't contribute much after enabling the POWERLEVEL9K_MODE
+#POWERLEVEL9K_USER_ICON="\uF415" # 
+#POWERLEVEL9K_ROOT_ICON="\uF09C"
+#POWERLEVEL9K_SUDO_ICON=$'\uF09C' # 
+#POWERLEVEL9K_VCS_GIT_ICON='\uF408 '
+#POWERLEVEL9K_VCS_GIT_GITHUB_ICON='\uF408 '
+
+ENABLE_CORRECTION="true"
+COMPLETION_WAITING_DOTS="true"
+
+antigen bundle git
+antigen bundle command-not-found
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle zsh-users/zsh-syntax-highlighting
 antigen apply
 include ~/dotfiles_overrides/apply.sh
