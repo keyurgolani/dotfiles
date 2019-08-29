@@ -75,6 +75,88 @@ function load_color()
     fi
 }
 
+update() {
+    echo "Updating machine"
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # OSX
+        brew update && brew upgrade
+    else
+        if [[ `cat /etc/issue` == *"Ubuntu"* ]]; then
+            # Ubuntu
+            sudo apt-get update && sudo apt-get upgrade
+        else
+            # RHEL/Amazon Linux
+            sudo yum update -y
+        fi
+    fi
+}
+
+before() {
+    BASE_DIR="$(dirname "${BASH_SOURCE[0]}")"
+
+    pushd $BASE_DIR > /dev/null
+}
+
+after() {
+    popd > /dev/null
+}
+
+# Run a singel unit test
+function bbut() {
+  if [ -z "$1" ]; then
+    brazil-build unit-tests
+  else
+    files=$(find . -name "$1.java")
+    class=$(sed -n "s/^package \(.*\);/\1.$1/p" "$files" 2>/dev/null)
+    if [ -z "$class" ]; then
+      echo "Test class $1.java not found - make sure it's below your current location in the directory structure."
+    elif [ -z "$2" ]; then
+      brazil-build single-unit-test -DtestClass="$class"
+    else
+      brazil-build single-unit-test -DtestClass="$class" -DtestMethods="$2"
+    fi
+  fi
+}
+
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Utility command to run a command and kill it (sending SIGKILL) after a timeout
+timeout () {
+    [ "${1:-}" = "-h" -o "${1:-}" = "--help" ] && { printf "USAGE: timeout [--no-msg] <delay-in-deconds> <cmd>\n  <cmd> can start with 'exec' to avoid creating a new process\n" ; return ; }
+    local no_msg=false; [ "${1:-}" = "--no-msg" ] && { no_msg=true ; shift ; }
+    local s=${1:?'Missing timeout parameters'} ; shift
+    ( pid=$(sh -c 'echo $PPID')
+      ( $no_msg || echo "Command launched with a ${s}s timeout. To let it live: kill $(sh -c 'echo $PPID')"
+        sleep $s
+        kill -9 $pid 2>/dev/null || true
+      ) & "${@:?'Missing timeout command'}"
+    )
+}
+
+export PATH=
+path=(
+       ~/bin
+       ~/usr/bin
+       /usr/kerberos/bin
+       /apollo/env/SDETools/bin
+       $ENV_IMPROVEMENT_ROOT/bin
+       /usr/local/bin
+       /usr/bin
+       /bin
+       /usr/sbin
+       /sbin
+       /usr/local/sbin
+       /apollo/bin
+       /apollo/sbin
+       /apollo/env/ApolloCommandLine/bin
+     )
+
+# Cd up some number of folders. Example: up 5
+up () {
+    set -A ud
+    ud[1+${1-1}]=
+        cd ${(j:../:)ud}
+}
 
 ```
 
