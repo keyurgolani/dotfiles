@@ -14,4 +14,5 @@ include () {
 
 export DIRECTORY=~/.dotfiles
 
-for f in $DIRECTORY/dotfiles/*.import; do include $f; done
+include $DIRECTORY/dotfiles/zshrc.import
+include $DIRECTORY/dotfiles/apply.import

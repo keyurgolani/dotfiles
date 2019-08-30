@@ -17,8 +17,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyurgolani/dotfiles/maste
 - [x] Add git configuration
 - [ ] Add Unsplas Wallpaper install
 - [ ] Add a default wallpaper
-- [ ] Add a terminal profile for iterm
-- [ ] Make gitignore file more rich --> Refer: https://github.com/github/gitignore
+- [x] Add a terminal profile for iterm
+- [x] Make gitignore file more rich --> Refer: https://github.com/github/gitignore (Don't want to overdo it. People should have project specific `.gitignore` because not everyone is going to be using this dotfiles.)
 - [ ] Add VSCode configuration
 - [x] Add VSCode extensions
 - [ ] Add IntelliJ configuration
@@ -29,7 +29,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/keyurgolani/dotfiles/maste
 - [ ] Add option for "Yes" / "No" / "Yes For All" / "No For All" options
 - [x] Add EditorConfig file for the code style consistency.
 - [x] Add git log beautification
-- [ ] Add convenient binaries / scripts
+- [x] Add convenient binaries / scripts (Will add more as time goes by)
 - [ ] Add an uninstall script
 - [ ] Add other OSes
 - [ ] And More...!

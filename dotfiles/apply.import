@@ -1,1 +1,5 @@
-for f in ~/dotfiles_overrides/*.sh; do include $f; done
+include ~/dotfiles_overrides/export_overrides.sh
+include ~/dotfiles_overrides/color_overrides.sh
+include ~/dotfiles_overrides/alias_overrides.sh
+include ~/dotfiles_overrides/function_overrides.sh
+include ~/dotfiles_overrides/local_overrides.sh

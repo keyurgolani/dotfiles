@@ -14,6 +14,8 @@ brew install reattach-to-user-namespace
 brew install go
 brew install apache2
 brew install tmux-xpanes
+gem install colorls
+ln $(dirname $(dirname $(gem which colorls)))/exe/colorls /usr/local/bin/colorls
 gem install tmuxinator
 brew install tmuxinator-completion
 brew install python

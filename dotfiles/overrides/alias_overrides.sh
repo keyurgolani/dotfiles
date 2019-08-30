@@ -68,8 +68,6 @@ alias u="sudo softwareupdate --install --all \
             && npm install -g npm \
             && npm update -g"
 
-#!/usr/bin/env bash
-
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -98,3 +96,11 @@ alias sshdev="ssh clouddesk"
 alias sourceall="source ~/.zshrc"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# Get list of currently open ports
+alias ports="netstat -tupln"
+
+alias f="find . -type f -follow -name "
+alias g="find . -type f -follow | xargs grep"
+
+alias ls="colorls --group-directories-first"

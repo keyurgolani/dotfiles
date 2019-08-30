@@ -64,35 +64,3 @@ find-pwd() {
 function cd {
     builtin cd "$@" && ls
 }
-
-function sshtunnel() {
-    ssh -L $1:127.0.0.1:$1 golani.aka.corp.amazon.com
-}
-
-function cache_refresh() {
-    brazil-package-cache clean
-    brazil-package-cache disable_edge_cache
-    brazil-package-cache stop
-    brazil-package-cache start
-}
-
-function remove_ws_package() {
-    cd ~/workplace/$1 && brazil ws remove --package $2 && cd -;
-}
-
-function crd() {
-    cr -o --description="# Overview
-
-## $(basename $(pwd))
-
-### $(git log -1 --pretty=%B)
-
-# Testing
-
-- \`brazil-build\`
-
-# Other notes
-
-- N/A
-" $*
-}

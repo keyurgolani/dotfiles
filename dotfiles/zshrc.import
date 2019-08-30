@@ -138,14 +138,41 @@ zsh_wifi_signal(){
 
 POWERLEVEL9K_CONTEXT_TEMPLATE='%n'
 POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND='white'
-POWERLEVEL9K_BATTERY_CHARGING='yellow'
-POWERLEVEL9K_BATTERY_CHARGED='green'
-POWERLEVEL9K_BATTERY_DISCONNECTED='$DEFAULT_COLOR'
-POWERLEVEL9K_BATTERY_LOW_THRESHOLD='10'
-POWERLEVEL9K_BATTERY_LOW_COLOR='red'
+
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=''
-POWERLEVEL9K_BATTERY_ICON='\uf1e6 '
+
+# POWERLEVEL9K_BATTERY_CHARGING='yellow'
+# POWERLEVEL9K_BATTERY_CHARGED='green'
+# POWERLEVEL9K_BATTERY_DISCONNECTED='$DEFAULT_COLOR'
+# POWERLEVEL9K_BATTERY_LOW_THRESHOLD='10'
+# POWERLEVEL9K_BATTERY_LOW_COLOR='red'
+# POWERLEVEL9K_BATTERY_ICON='\uf1e6 '
+
+
+# Battery - See https://github.com/bhilburn/powerlevel9k#battery
+POWERLEVEL9K_BATTERY_VERBOSE=false  # Display time remaining next to battery level.
+# Stages instead of icon
+BATTERY_STAGES_5=('  ' '  ' '  ' '  ' '  ')
+BATTERY_STAGES_40=(
+	"▏    ▏" "▎    ▏" "▍    ▏" "▌    ▏" "▋    ▏" "▊    ▏" "▉    ▏" "█    ▏"
+	"█▏   ▏" "█▎   ▏" "█▍   ▏" "█▌   ▏" "█▋   ▏" "█▊   ▏" "█▉   ▏" "██   ▏"
+	"██   ▏" "██▎  ▏" "██▍  ▏" "██▌  ▏" "██▋  ▏" "██▊  ▏" "██▉  ▏" "███  ▏"
+	"███  ▏" "███▎ ▏" "███▍ ▏" "███▌ ▏" "███▋ ▏" "███▊ ▏" "███▉ ▏" "████ ▏"
+	"████ ▏" "████▎▏" "████▍▏" "████▌▏" "████▋▏" "████▊▏" "████▉▏" "█████▏")
+POWERLEVEL9K_BATTERY_STAGES=($BATTERY_STAGES_5)
+# Background color
+POWERLEVEL9K_BATTERY_LEVEL_BACKGROUND=(196 202 208 214 220 226 190 154 118 82 46)
+# Foreground colors all the same (I don't care for the provided states)
+BATTERY_FOREGROUND='black'
+POWERLEVEL9K_BATTERY_LOW_FOREGROUND=$BATTERY_FOREGROUND
+POWERLEVEL9K_BATTERY_CHARGING_FOREGROUND=$BATTERY_FOREGROUND
+POWERLEVEL9K_BATTERY_CHARGED_FOREGROUND=$BATTERY_FOREGROUND
+POWERLEVEL9K_BATTERY_DISCONNECTED_FOREGROUND=$BATTERY_FOREGROUND
+
+
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+POWERLEVEL9K_PROMPT_ADD_NEWLINE_COUNT=1
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{014}\u2570%F{cyan}\uF460%F{073}\uF460%F{109}\uF460%f "
 POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='yellow'
 POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='yellow'
@@ -154,8 +181,13 @@ POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon root_indicator context battery dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time root_indicator status time dir_writable)
 
+POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=$'\uE0C4'
+# POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR='\uE0C8'
+POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=$'\uE0C5'
+# POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=$'\uE0C7'
+
 #POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-POWERLEVEL9K_MODE="nerdfont-complete"
+POWERLEVEL9K_MODE="nerdfont-complete" # awesome-fontconfig | awesome-mapped-fontconfig | awesome-patched | nerdfont-complete | nerdfont-fontconfig
 #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX=" $  " # For $ > prefix
 #POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{014}\u2570%F{cyan}\uF460%F{073}\uF460%F{109}\uF460%f " # For >>> prefix
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) " # For a green or red ➜ depending on previous command run success result
@@ -196,3 +228,9 @@ antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen apply
 include ~/dotfiles_overrides/apply.sh
+
+
+# TODO: Find a right place to put terminal preferences / configurations like this
+# TODO: Better yet, separate the zshrc.import into zshtheme.import and zshpreferences.import for modularization
+bindkey "^T" push-line-or-edit
+ENABLE_CORRECTION="true"
