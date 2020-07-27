@@ -57,3 +57,4 @@ ask_and_include "Slow Quit Apps" $DIRECTORY/setup/installs/slow_quit_apps.sh
 ask_and_include "Android Messages" $DIRECTORY/setup/installs/android_messages.sh
 ask_and_include "GPG" $DIRECTORY/setup/installs/gpg.sh
 ask_and_include "LICEcap" $DIRECTORY/setup/installs/licecap.sh
+ask_and_include "Microsoft Edge" $DIRECTORY/setup/installs/edge.sh
