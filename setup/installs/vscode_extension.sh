@@ -30,3 +30,4 @@ code --install-extension Tyriar.sort-lines --force
 code --install-extension wayou.vscode-todo-highlight --force
 code --install-extension shardulm94.trailing-spaces --force
 code --install-extension vscode-icons-team.vscode-icons --force
+code --install-extension snipit.vscode-extension --force
