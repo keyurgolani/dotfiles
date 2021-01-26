@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-brew cask install popclip
+brew install --cask popclip

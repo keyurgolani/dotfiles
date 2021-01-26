@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-brew cask install beyond-compare
+brew install --cask beyond-compare

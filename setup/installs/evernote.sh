@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-brew cask install evernote
+brew install --cask evernote

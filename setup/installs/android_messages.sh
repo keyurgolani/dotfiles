@@ -1,1 +1,1 @@
-brew cask install android-messages
+brew install --cask android-messages

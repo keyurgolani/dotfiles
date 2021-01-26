@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-brew cask install android-file-transfer
+brew install --cask android-file-transfer

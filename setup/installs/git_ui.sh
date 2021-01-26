@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-brew cask install rowanj-gitx
-brew cask install sourcetree
+brew install --cask rowanj-gitx
+brew install --cask sourcetree

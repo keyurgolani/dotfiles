@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-brew cask install skyfonts
+brew install --cask skyfonts

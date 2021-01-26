@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-brew cask install font-fira-code
+brew install --cask font-fira-code

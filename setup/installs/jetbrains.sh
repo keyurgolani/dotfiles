@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-brew cask install jetbrains-toolbox
-brew cask install intellij-idea
+brew install --cask jetbrains-toolbox
+brew install --cask intellij-idea

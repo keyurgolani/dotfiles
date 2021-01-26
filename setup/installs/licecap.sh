@@ -1,1 +1,1 @@
-brew cask install licecap
+brew install --cask licecap

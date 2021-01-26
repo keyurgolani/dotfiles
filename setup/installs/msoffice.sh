@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-brew cask install microsoft-office
+brew install --cask microsoft-office

@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-brew cask install rocket
+brew install --cask rocket

@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-brew cask install jetbrains-toolbox
-brew cask install pycharm
+brew install --cask jetbrains-toolbox
+brew install --cask pycharm

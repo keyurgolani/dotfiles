@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-brew cask install adobe-acrobat-reader
+brew install --cask adobe-acrobat-reader
