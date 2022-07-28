@@ -86,8 +86,6 @@ fi
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(zsh-autosuggestions autojump autopep8 aws brew common-aliases copyfile dirhistory docker encode64 extract git gitfast git-extras git-flow github httpie history jsontools kubectl last-working-dir macos per-directory-history pep8 pip pylint python repo redis-cli ssh-agent sudo supervisor tmux tmuxinator virtualenvwrapper vscode web-search)
 
-source $ZSH/oh-my-zsh.sh
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
