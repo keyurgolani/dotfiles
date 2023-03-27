@@ -104,7 +104,7 @@ fi
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-source /usr/local/share/antigen/antigen.zsh
+source /opt/homebrew/share/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 antigen theme bhilburn/powerlevel9k powerlevel9k
