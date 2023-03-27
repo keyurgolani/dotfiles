@@ -64,3 +64,14 @@ find-pwd() {
 function cd {
     builtin cd "$@" && ls
 }
+
+
+################ MWINIT Helpers #################
+# check the positive case (if there are 2 entries, you don't need to mwinit)
+mwinit_if_necessary() {
+    if ! [[ "2" == "$(mwinit -l | grep $HOME | wc -l | awk '{print $1}')" ]]; then
+        mwinit
+    fi
+}
+
+alias ssh='mwinit_if_necessary; ssh'

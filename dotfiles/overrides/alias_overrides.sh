@@ -104,3 +104,8 @@ alias f="find . -type f -follow -name "
 alias g="find . -type f -follow | xargs grep"
 
 alias ls="colorls --group-directories-first"
+
+
+##################### Your DevDesktop Alias ###################
+alias golani="ssh golani.aka.corp.amazon.com"
+alias devdesk="golani"

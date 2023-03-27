@@ -59,3 +59,54 @@ shopt -s no_empty_cmd_completion
 # filename expansion.
 
 shopt -s nocaseglob
+
+
+######################### zsh options ################################                   
+setopt ALWAYS_TO_END           # Push that cursor on completions.
+setopt AUTO_NAME_DIRS          # change directories  to variable names
+setopt AUTO_PUSHD              # push directories on every cd
+setopt NO_BEEP                 # self explanatory
+
+
+fpath=(~/.zsh/completion $fpath)
+
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+compinit
+
+
+######################### prompt options ################################                   
+export PURE_CMD_MAX_EXEC_TIME=200
+
+
+########################## history options ############################ 
+setopt EXTENDED_HISTORY        # store time in history                                   
+setopt HIST_EXPIRE_DUPS_FIRST  # unique events are more usefull to me                    
+setopt HIST_VERIFY             # Make those history commands nice                        
+setopt INC_APPEND_HISTORY      # immediatly insert history into history file             
+HISTSIZE=16000                 # spots for duplicates/uniques                            
+SAVEHIST=15000                 # unique events guarenteed                                
+HISTFILE=~/.history
+
+
+######################### Antibody ################################                   
+# Package manager for ZSH plugins, themes, etc.
+# http://getantibody.github.io/
+source <(antibody init)                                                                   
+antibody bundle mafredri/zsh-async                               
+antibody bundle sindresorhus/pure
+# antibody bundle denysdovhan/spaceship-prompt -- optional theme, comment out "pure" if you want to use this one.
+antibody bundle zsh-users/zsh-autosuggestions
+antibody bundle zsh-users/zsh-syntax-highlighting
+
+
+################# Program Replacements ################
+if ! [[ -x "$(command -v bat)" ]]; then
+    export alias cat="bat"
+fi
+
+
+##################### Key Binds #####################
+bindkey "^T" push-line-or-edit  # Enables you put your current command on a stack, execute another command, and have it return
+bindkey '^F' forward-word
+bindkey '^D' backward-word
