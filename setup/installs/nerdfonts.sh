@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-brew install --cask $(brew search nerd-font | sed '1d;')
+brew tap homebrew/cask-fonts
+brew search '/font-.*-nerd-font/' | awk '{ print $1 }' | xargs -I{} brew install --cask {} || true
