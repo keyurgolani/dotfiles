@@ -80,12 +80,18 @@ export PURE_CMD_MAX_EXEC_TIME=200
 
 
 ########################## history options ############################ 
-setopt EXTENDED_HISTORY        # store time in history                                   
-setopt HIST_EXPIRE_DUPS_FIRST  # unique events are more usefull to me                    
-setopt HIST_VERIFY             # Make those history commands nice                        
-setopt INC_APPEND_HISTORY      # immediatly insert history into history file             
-HISTSIZE=16000                 # spots for duplicates/uniques                            
-SAVEHIST=15000                 # unique events guarenteed                                
+setopt EXTENDED_HISTORY        # store time in history
+# History doesn't repeat items
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_VERIFY             # Make those history commands nice
+setopt INC_APPEND_HISTORY      # immediatly insert history into history file
+HISTSIZE=16000                 # spots for duplicates/uniques
+SAVEHIST=15000                 # unique events guarenteed
 HISTFILE=~/.history
 
 

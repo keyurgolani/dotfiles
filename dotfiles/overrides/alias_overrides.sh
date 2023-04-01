@@ -91,8 +91,6 @@ alias rm="rm -rf --"
 alias t="tmux"
 alias y="yarn"
 
-
-alias sshdev="ssh clouddesk"
 alias sourceall="source ~/.zshrc"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -109,3 +107,4 @@ alias ls="colorls --group-directories-first"
 ##################### Your DevDesktop Alias ###################
 alias golani="ssh golani.aka.corp.amazon.com"
 alias devdesk="golani"
+alias sshdev="golani"
