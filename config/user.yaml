@@ -1,0 +1,27 @@
+# User-specific configuration for Unified Dotfiles Framework
+# This file contains user preferences and overrides
+
+user:
+  name: "[YOUR_NAME]"
+  email: "[YOUR_EMAIL]"
+  github_username: "[YOUR_GITHUB_USERNAME]"
+  shell: "${SHELL##*/}"
+  editor: "${EDITOR:-vim}"
+  timezone: "${TZ:-}"
+
+preferences:
+  theme: "${THEME:-auto}"
+  color_scheme: "${COLOR_SCHEME:-}"
+  font_family: "${FONT_FAMILY:-}"
+  font_size: 12
+
+# User-specific module overrides
+modules:
+  enabled: []
+  disabled: []
+
+# User-specific setting overrides
+settings:
+  backup_enabled: true
+  interactive_mode: true
+  log_level: "${LOG_LEVEL:-info}"

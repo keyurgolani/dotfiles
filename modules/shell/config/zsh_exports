@@ -1,0 +1,54 @@
+# Unified Dotfiles Framework - ZSH Exports
+# Consolidated from zsh_dotfiles and other projects
+# This file supports environment variable substitution
+
+# Include all bash exports for compatibility
+if [[ -f "$HOME/.bash_exports" ]]; then
+    source "$HOME/.bash_exports"
+fi
+
+# ZSH specific exports
+
+# ZSH configuration
+export ZSH_DISABLE_COMPFIX=true  # Disable insecure directory warnings
+
+# ZSH history configuration (enhanced)
+export HISTFILE=~/.zsh_history
+export HISTSIZE={{HISTORY_SIZE|10000}}
+export SAVEHIST={{HISTORY_FILE_SIZE|10000}}
+
+# ZSH options via exports
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_BEEP
+setopt SHARE_HISTORY
+setopt EXTENDED_HISTORY
+
+# ZSH completion configuration
+export COMPLETION_WAITING_DOTS="true"
+export DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# FZF configuration if available
+if command -v fzf >/dev/null 2>&1; then
+    export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
+    export FZF_DEFAULT_COMMAND='find . -type f -not -path "*/\.git/*" -not -path "*/node_modules/*"'
+fi
+
+# Powerlevel10k configuration
+if [[ -n "$ENABLE_POWERLEVEL10K" && "$ENABLE_POWERLEVEL10K" == "true" ]]; then
+    export POWERLEVEL9K_MODE="nerdfont-complete"
+    export POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+    export POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+fi
+
+# Oh My Zsh configuration
+export ZSH_THEME="{{ZSH_THEME|robbyrussell}}"
+export DISABLE_AUTO_UPDATE="{{DISABLE_OMZ_AUTO_UPDATE|false}}"
+export DISABLE_UPDATE_PROMPT="{{DISABLE_OMZ_UPDATE_PROMPT|false}}"
+
+# ZSH performance optimizations
+export DISABLE_MAGIC_FUNCTIONS=true  # Disable URL pasting magic for performance

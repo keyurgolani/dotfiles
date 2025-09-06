@@ -1,0 +1,84 @@
+name: "example-plugin"
+version: "1.2.0"
+description: "Comprehensive example plugin demonstrating all plugin system capabilities including version management, hooks, templates, and cross-platform support"
+api_version: "1.0.0"
+
+author:
+  name: "Dotfiles Framework Team"
+  email: "plugins@dotfiles-framework.org"
+  url: "https://github.com/dotfiles-framework"
+
+license: "MIT"
+homepage: "https://github.com/dotfiles-framework/plugins/example-plugin"
+repository: "https://github.com/dotfiles-framework/plugins.git"
+
+platforms:
+  - "all"
+
+categories:
+  - "development"
+  - "productivity"
+  - "other"
+
+dependencies:
+  modules:
+    - "shell"
+    - "git"
+  plugins: []
+  system:
+    all:
+      - "curl"
+      - "git"
+    macos:
+      - "jq"
+    ubuntu:
+      - "jq"
+      - "wget"
+    wsl:
+      - "jq"
+    amazon-linux:
+      - "jq"
+
+conflicts:
+  - "old-example-plugin"
+  - "conflicting-tool"
+
+hooks:
+  pre_install: "scripts/pre_install.sh"
+  post_install: "scripts/post_install.sh"
+  pre_uninstall: "scripts/pre_uninstall.sh"
+  post_uninstall: "scripts/post_uninstall.sh"
+  pre_update: "scripts/pre_update.sh"
+  post_update: "scripts/post_update.sh"
+
+configuration:
+  priority: 50
+  interactive: false
+
+files:
+  - source: "config/example.conf"
+    target: "~/.config/example/config"
+    template: true
+    backup: true
+    platforms: ["all"]
+  - source: "config/example-macos.conf"
+    target: "~/.config/example/platform.conf"
+    template: true
+    backup: true
+    platforms: ["macos"]
+  - source: "config/example-linux.conf"
+    target: "~/.config/example/platform.conf"
+    template: true
+    backup: true
+    platforms: ["ubuntu", "wsl", "amazon-linux"]
+  - source: "bin/example-tool"
+    target: "~/.local/bin/example-tool"
+    executable: true
+    backup: true
+    platforms: ["all"]
+  - source: "templates/shell-integration.sh"
+    target: "~/.config/example/shell-integration.sh"
+    template: true
+    executable: false
+    backup: true
+    platforms: ["all"]

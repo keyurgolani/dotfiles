@@ -1,0 +1,211 @@
+#!/usr/bin/env bash
+
+# =============================================================================
+# Linux Specific Aliases
+# =============================================================================
+# This file contains aliases that are specific to Linux systems
+
+# Only load if we're on Linux
+[[ "$OSTYPE" != "linux-gnu"* ]] && return
+
+# =============================================================================
+# PACKAGE MANAGEMENT
+# =============================================================================
+
+# Detect package manager and create appropriate aliases
+if command -v apt >/dev/null 2>&1; then
+    # Debian/Ubuntu
+    alias install='sudo apt install'
+    alias update='sudo apt update && sudo apt upgrade'
+    alias search='apt search'
+    alias remove='sudo apt remove'
+    alias autoremove='sudo apt autoremove'
+    alias clean='sudo apt autoclean'
+elif command -v yum >/dev/null 2>&1; then
+    # RHEL/CentOS/Fedora (older)
+    alias install='sudo yum install'
+    alias update='sudo yum update'
+    alias search='yum search'
+    alias remove='sudo yum remove'
+    alias clean='sudo yum clean all'
+elif command -v dnf >/dev/null 2>&1; then
+    # Fedora (newer)
+    alias install='sudo dnf install'
+    alias update='sudo dnf update'
+    alias search='dnf search'
+    alias remove='sudo dnf remove'
+    alias clean='sudo dnf clean all'
+elif command -v pacman >/dev/null 2>&1; then
+    # Arch Linux
+    alias install='sudo pacman -S'
+    alias update='sudo pacman -Syu'
+    alias search='pacman -Ss'
+    alias remove='sudo pacman -R'
+    alias clean='sudo pacman -Sc'
+fi
+
+# =============================================================================
+# SYSTEM INFORMATION
+# =============================================================================
+
+# System info
+alias sysinfo='uname -a'
+alias distro='cat /etc/os-release'
+alias kernel='uname -r'
+
+# Hardware info
+alias cpu='cat /proc/cpuinfo'
+alias mem='cat /proc/meminfo'
+alias disk='df -h'
+
+# =============================================================================
+# PROCESS MANAGEMENT
+# =============================================================================
+
+# Process management
+alias psg='ps aux | grep'
+alias killall='pkill'
+
+# System monitoring
+alias top='htop'
+alias processes='ps aux'
+
+# =============================================================================
+# NETWORK
+# =============================================================================
+
+# Network information
+alias myip='curl -s ifconfig.me'
+alias localip="ip route get 1 | awk '{print \$NF;exit}'"
+
+# Network tools
+alias ports='netstat -tuln'
+alias listening='netstat -tuln | grep LISTEN'
+
+# =============================================================================
+# FILE OPERATIONS
+# =============================================================================
+
+# Enhanced ls with colors
+alias ls='ls --color=auto'
+alias ll='ls -alF --color=auto'
+alias la='ls -A --color=auto'
+alias l='ls -CF --color=auto'
+
+# Directory listing only
+alias lsd='ls -l --color=auto | grep "^d"'
+
+# File size
+alias size='stat -c "%s bytes"'
+alias showsize='du -h --max-depth=1'
+
+# =============================================================================
+# SYSTEM SERVICES
+# =============================================================================
+
+# Systemd shortcuts (if available)
+if command -v systemctl >/dev/null 2>&1; then
+    alias start='sudo systemctl start'
+    alias stop='sudo systemctl stop'
+    alias restart='sudo systemctl restart'
+    alias status='systemctl status'
+    alias enable='sudo systemctl enable'
+    alias disable='sudo systemctl disable'
+    alias reload='sudo systemctl reload'
+fi
+
+# =============================================================================
+# CLIPBOARD (if available)
+# =============================================================================
+
+# Clipboard operations (requires xclip or xsel)
+if command -v xclip >/dev/null 2>&1; then
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
+elif command -v xsel >/dev/null 2>&1; then
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
+fi
+
+# =============================================================================
+# DEVELOPMENT TOOLS
+# =============================================================================
+
+# Build tools
+alias make='make -j$(nproc)'
+
+# Python
+alias py='python3'
+alias pip='pip3'
+
+# =============================================================================
+# SECURITY & PERMISSIONS
+# =============================================================================
+
+# Permission shortcuts
+alias chx='chmod +x'
+alias 755='chmod 755'
+alias 644='chmod 644'
+
+# =============================================================================
+# ARCHIVE OPERATIONS
+# =============================================================================
+
+# Archive extraction
+alias extract='tar -xvf'
+alias compress='tar -czvf'
+
+# =============================================================================
+# DISK OPERATIONS
+# =============================================================================
+
+# Disk usage
+alias du1='du -h --max-depth=1'
+alias df='df -h'
+alias free='free -h'
+
+# =============================================================================
+# LOG FILES
+# =============================================================================
+
+# System logs
+alias logs='sudo journalctl -f'
+alias syslog='tail -f /var/log/syslog'
+alias messages='tail -f /var/log/messages'
+
+# =============================================================================
+# FIREWALL (if available)
+# =============================================================================
+
+# UFW shortcuts (Ubuntu)
+if command -v ufw >/dev/null 2>&1; then
+    alias fw='sudo ufw'
+    alias fwstatus='sudo ufw status'
+    alias fwenable='sudo ufw enable'
+    alias fwdisable='sudo ufw disable'
+fi
+
+# =============================================================================
+# DOCKER (if available)
+# =============================================================================
+
+if command -v docker >/dev/null 2>&1; then
+    alias dps='docker ps'
+    alias dpa='docker ps -a'
+    alias di='docker images'
+    alias drmi='docker rmi'
+    alias drmf='docker rm -f'
+    alias dlog='docker logs'
+    alias dexec='docker exec -it'
+fi
+
+# =============================================================================
+# QUICK NAVIGATION
+# =============================================================================
+
+# Common directories
+alias home='cd ~'
+alias root='cd /'
+alias etc='cd /etc'
+alias var='cd /var'
+alias tmp='cd /tmp'

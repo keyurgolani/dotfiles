@@ -1,0 +1,33 @@
+name: "shell"
+version: "1.0.0"
+description: "Shell configuration (zsh/bash) with aliases, functions, and exports"
+category: "shell"
+dependencies: []
+platforms:
+  - macos
+  - ubuntu
+  - wsl
+  - amazon-linux
+packages:
+  macos:
+    - zsh
+    - oh-my-zsh
+    - zsh-autosuggestions
+    - autojump
+    - colorls
+  ubuntu:
+    - zsh
+    - curl
+    - git
+files:
+  - source: "config/common/aliases"
+    target: "~/.aliases"
+  - source: "config/common/functions"
+    target: "~/.functions"
+  - source: "config/common/exports"
+    target: "~/.exports"
+  - source: "templates/zshrc.template"
+    target: "~/.zshrc"
+    template: true
+hooks:
+  post_install: "scripts/setup_oh_my_zsh.sh"

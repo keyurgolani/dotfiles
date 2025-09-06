@@ -1,0 +1,10 @@
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorTheme": "Material Theme High Contrast",
+    "editor.fontSize": 17,
+    "editor.fontFamily": "'Monofur Nerd Font Mono',Menlo, Monaco, 'Courier New', monospace",
+    "editor.renderWhitespace": "all",
+    "editor.cursorStyle": "line-thin",
+    "editor.scrollBeyondLastColumn": 5
+}

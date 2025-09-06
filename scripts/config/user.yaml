@@ -1,0 +1,23 @@
+# User-specific configuration for Unified Dotfiles Framework
+user:
+  name: "Keyur Golani"
+  email: "golani@amazon.com"
+  github_username: "keyurgolani"
+  shell: "${SHELL##*/}"
+  editor: "${EDITOR:-vim}"
+  timezone: "${TZ:-}"
+
+preferences:
+  theme: "${THEME:-auto}"
+  color_scheme: "${COLOR_SCHEME:-}"
+  font_family: "${FONT_FAMILY:-}"
+  font_size: 12
+
+modules:
+  enabled: []
+  disabled: []
+
+settings:
+  backup_enabled: true
+  interactive_mode: true
+  log_level: "${LOG_LEVEL:-info}"

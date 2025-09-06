@@ -1,0 +1,289 @@
+#!/usr/bin/env bash
+
+# =============================================================================
+# Unified Dotfiles Framework - Shell Aliases
+# =============================================================================
+# This file contains all shell aliases organized by category
+# Compatible with both bash and zsh
+
+# =============================================================================
+# NAVIGATION & DIRECTORY OPERATIONS
+# =============================================================================
+
+# Directory navigation shortcuts
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias cd..='cd ..'
+alias ~='cd ~'
+alias -- -='cd -'
+
+# Directory stack (zsh-specific, but safe for bash)
+if [[ -n "$ZSH_VERSION" ]]; then
+    alias d='dirs -v | head -10'
+    alias 1='cd -1'
+    alias 2='cd -2'
+    alias 3='cd -3'
+    alias 4='cd -4'
+    alias 5='cd -5'
+    alias 6='cd -6'
+    alias 7='cd -7'
+    alias 8='cd -8'
+    alias 9='cd -9'
+fi
+
+# =============================================================================
+# FILE OPERATIONS
+# =============================================================================
+
+# Enhanced file operations
+alias mkdir='mkdir -pv'
+alias mv='mv -v'
+alias cp='cp -v'
+alias rm='rm -i -v'
+
+# File listing
+alias ll='ls -lAh'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Conditional ls enhancements
+if command -v colorls >/dev/null 2>&1; then
+    alias ls='colorls --group-directories-first'
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    alias ls='ls -G'
+else
+    alias ls='ls --color=auto'
+fi
+
+# Directory listing only
+alias lsd='ls -l | grep "^d"'
+
+# File size and disk usage
+alias size="stat -f '%z bytes'"
+alias showsize='du -h --max-depth=1'
+alias diskspace='df -P -kHl'
+
+# =============================================================================
+# SEARCH & FIND
+# =============================================================================
+
+# Find operations
+alias f='find . -type f -name'
+alias ff='find . -type f -follow -name'
+
+# Grep with color
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Search in files
+alias g='find . -type f -follow | xargs grep'
+
+# =============================================================================
+# SYSTEM & PROCESS MANAGEMENT
+# =============================================================================
+
+# System shortcuts
+alias c='clear'
+alias cc='reset'
+alias h='history'
+alias hg='history | grep'
+alias ports='netstat -tupln'
+alias path='printf "%b\n" "${PATH//:/\\n}"'
+
+# Process management
+alias psg='ps aux | grep'
+alias top='top -o cpu'
+
+# =============================================================================
+# DEVELOPMENT TOOLS
+# =============================================================================
+
+# Editor shortcuts
+alias e='$EDITOR'
+alias v='vim'
+alias vi='vim'
+alias edit='$EDITOR'
+
+# Version control
+alias g='git'
+alias gst='git status'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gp='git push'
+alias gpl='git pull'
+alias gf='git fetch'
+alias gr='git rebase'
+alias gm='git merge'
+alias gl='git log'
+alias gd='git diff'
+alias ga='git add'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gam='git commit -am'
+alias gb='git branch'
+
+# Package managers
+alias n='npm'
+alias y='yarn'
+alias t='tmux'
+
+# =============================================================================
+# HOMEBREW (macOS)
+# =============================================================================
+
+if command -v brew >/dev/null 2>&1; then
+    alias brewi='brew install'
+    alias brewr='brew uninstall'
+    alias brews='brew search'
+    alias brewd='brew doctor'
+    alias brewu='brew update && brew upgrade && brew cleanup'
+    alias cask='brew cask'
+fi
+
+# =============================================================================
+# NETWORK & INTERNET
+# =============================================================================
+
+# IP addresses
+alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias myip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print \$2}'"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# Network utilities
+alias dig='dig +nocmd any +multiline +noall +answer'
+alias get='curl -O -L'
+
+# macOS specific network
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    alias local-ip='ipconfig getifaddr en1'
+    alias flushdns='dscacheutil -flushcache'
+    alias clear-dns-cache='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+fi
+
+# =============================================================================
+# macOS SPECIFIC
+# =============================================================================
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # System operations
+    alias o='open'
+    alias oo='open .'
+    alias afk='/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend'
+    
+    # Finder operations
+    alias show='defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder'
+    alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder'
+    alias showdesktop='defaults write com.apple.finder CreateDesktop -bool true && killall Finder'
+    alias hidedesktop='defaults write com.apple.finder CreateDesktop -bool false && killall Finder'
+    
+    # System maintenance
+    alias empty-trash='sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl'
+    alias cleanup-dsstore='find . -name "*.DS_Store" -type f -ls -delete'
+    
+    # Audio controls
+    alias stfu='osascript -e "set volume output muted true"'
+    alias pumpitup='osascript -e "set volume output volume 100"'
+    
+    # Clipboard operations
+    alias pubkey='more ~/.ssh/id_rsa.pub | pbcopy | printf "=> Public key copied to pasteboard.\n"'
+    alias trimcopy='tr -d "\n" | pbcopy'
+    
+    # Chrome memory management
+    alias chromekill='ps ux | grep "[C]hrome Helper --type=renderer" | grep -v extension-process | tr -s " " | cut -d " " -f2 | xargs kill'
+    
+    # Spotlight control
+    alias spotoff='sudo mdutil -a -i off'
+    alias spoton='sudo mdutil -a -i on'
+    
+    # System updates
+    alias u='sudo softwareupdate --install --all && brew update && brew upgrade && brew cleanup && npm install -g npm && npm update -g'
+    alias update='brew update && brew upgrade && npm install npm -g && npm update -g'
+fi
+
+# =============================================================================
+# SHELL SPECIFIC
+# =============================================================================
+
+# Shell reloading
+if [[ -n "$ZSH_VERSION" ]]; then
+    alias reload='source ~/.zshrc'
+    alias sourceall='source ~/.zshrc'
+elif [[ -n "$BASH_VERSION" ]]; then
+    alias reload='source ~/.bashrc'
+    alias sourceall='source ~/.bashrc'
+fi
+
+# History management
+alias ch='history -c && > ~/.bash_history'
+
+# =============================================================================
+# UTILITIES & SHORTCUTS
+# =============================================================================
+
+# Common shortcuts
+alias map='xargs -n1'
+alias x+='chmod +x'
+alias hosts='sudo $EDITOR /etc/hosts'
+
+# HTTP methods (requires lwp-request)
+if command -v lwp-request >/dev/null 2>&1; then
+    for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+        alias "$method"="lwp-request -m '$method'"
+    done
+fi
+
+# Python HTTP server
+alias servehttp='python -m SimpleHTTPServer 8000'
+alias serve='python -m http.server 8000'
+
+# =============================================================================
+# PERSONAL/WORK SPECIFIC (customize as needed)
+# =============================================================================
+
+# SSH shortcuts (customize these)
+# alias myserver='ssh user@server.com'
+# alias devbox='ssh dev.example.com'
+
+# Project shortcuts (customize these)
+# alias proj='cd ~/Projects'
+# alias work='cd ~/Work'
+
+# =============================================================================
+# SAFETY & CONFIRMATION
+# =============================================================================
+
+# Safer defaults for destructive operations
+alias rm='rm -i'
+
+# Enable sudo for aliases
+alias sudo='sudo '
+
+# =============================================================================
+# CONDITIONAL ALIASES (load if tools are available)
+# =============================================================================
+
+# Git aliases (only if git is available)
+if command -v git >/dev/null 2>&1; then
+    # Additional git shortcuts
+    alias gss='git status -s'
+    alias glp='git log --pretty --oneline'
+    alias glt='git log --all --graph --decorate --oneline --simplify-by-decoration'
+fi
+
+# Docker aliases (only if docker is available)
+if command -v docker >/dev/null 2>&1; then
+    alias d='docker'
+    alias dc='docker-compose'
+    alias dps='docker ps'
+    alias di='docker images'
+fi
+
+# Kubernetes aliases (only if kubectl is available)
+if command -v kubectl >/dev/null 2>&1; then
+    alias k='kubectl'
+    alias kgp='kubectl get pods'
+    alias kgs='kubectl get services'
+fi

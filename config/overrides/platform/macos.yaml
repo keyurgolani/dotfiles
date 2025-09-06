@@ -1,0 +1,25 @@
+# Platform-specific overrides for macOS
+# This configuration is automatically applied when running on macOS
+
+modules:
+  enabled:
+    - homebrew
+    - iterm2
+    - macos-defaults
+  disabled: []
+
+settings:
+  shell: "/bin/zsh"
+  package_manager: "brew"
+  platform_specific: true
+
+user:
+  platform: "macos"
+
+# macOS-specific package mappings
+packages:
+  git: "git"
+  vim: "vim"
+  tmux: "tmux"
+  node: "node"
+  python: "python@3.11"

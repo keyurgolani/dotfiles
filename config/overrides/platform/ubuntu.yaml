@@ -1,0 +1,27 @@
+# Platform-specific overrides for Ubuntu
+# This configuration is automatically applied when running on Ubuntu
+
+modules:
+  enabled:
+    - apt-tools
+    - ubuntu-defaults
+  disabled:
+    - homebrew
+    - iterm2
+
+settings:
+  shell: "/bin/bash"
+  package_manager: "apt"
+  platform_specific: true
+
+user:
+  platform: "ubuntu"
+
+# Ubuntu-specific package mappings
+packages:
+  git: "git"
+  vim: "vim"
+  tmux: "tmux"
+  node: "nodejs"
+  python: "python3"
+  build_tools: "build-essential"

@@ -1,0 +1,18 @@
+name: "macOS"
+package_manager: "brew"
+shell: "/bin/zsh"
+dependencies:
+  - xcode-select
+package_commands:
+  install: "brew install"
+  update: "brew upgrade"
+  search: "brew search"
+  cask_install: "brew install --cask"
+paths:
+  config: "~/.config"
+  local: "~/.local"
+  bin: "/usr/local/bin"
+  homebrew: "/opt/homebrew"
+system_preferences:
+  enabled: true
+  script: "scripts/install_preferences.sh"

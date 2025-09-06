@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+# =============================================================================
+# Unified Dotfiles Framework - Master Alias Loader
+# =============================================================================
+# This file loads all alias configurations in an organized manner
+# Replaces the old messy aliases file with a clean, modular structure
+
+# Get the directory where this script is located
+ALIASES_DIR="${BASH_SOURCE[0]%/*}"
+
+# =============================================================================
+# CORE ALIASES (always loaded)
+# =============================================================================
+
+# Load the main alias file with cross-platform aliases
+if [[ -f "$ALIASES_DIR/aliases_new" ]]; then
+    source "$ALIASES_DIR/aliases_new"
+fi
+
+# =============================================================================
+# PLATFORM-SPECIFIC ALIASES
+# =============================================================================
+
+# Load macOS-specific aliases
+if [[ "$OSTYPE" == "darwin"* ]] && [[ -f "$ALIASES_DIR/aliases_macos" ]]; then
+    source "$ALIASES_DIR/aliases_macos"
+fi
+
+# Load Linux-specific aliases
+if [[ "$OSTYPE" == "linux-gnu"* ]] && [[ -f "$ALIASES_DIR/aliases_linux" ]]; then
+    source "$ALIASES_DIR/aliases_linux"
+fi
+
+# =============================================================================
+# DEVELOPMENT ALIASES
+# =============================================================================
+
+# Load development-focused aliases
+if [[ -f "$ALIASES_DIR/aliases_dev" ]]; then
+    source "$ALIASES_DIR/aliases_dev"
+fi
+
+# =============================================================================
+# USER CUSTOMIZATION
+# =============================================================================
+
+# Load user-specific aliases (not tracked in git)
+if [[ -f "$HOME/.aliases_local" ]]; then
+    source "$HOME/.aliases_local"
+fi
+
+# Load work-specific aliases (not tracked in git)
+if [[ -f "$HOME/.aliases_work" ]]; then
+    source "$HOME/.aliases_work"
+fi
+
+# =============================================================================
+# ALIAS MANAGEMENT
+# =============================================================================
+
+# Alias to reload all aliases
+alias reload-aliases="source ${BASH_SOURCE[0]}"
+
+# Alias to list all aliases
+alias list-aliases="alias | sort"
+
+# Alias to search aliases
+alias find-alias="alias | grep"

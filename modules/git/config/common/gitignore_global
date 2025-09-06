@@ -1,0 +1,122 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+
+# Temporary files #
+###################
+*.sw[a-z]
+*~
+
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+
+# Logs #
+######################
+*.log
+
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+._*
+.AppleDouble
+.localized
+.LSOverride
+.Spotlight-V100
+.Trashes
+
+*.lock
+
+Desktop.ini
+ehthumbs.db
+Thumbs.db
+
+
+# IDE Configurations #
+######################
+
+.idea
+%*
+*.un~
+.netrwhist
+Session.vim
+# TODO: Add more common gitignore configs from https://github.com/github/gitignore
+
+
+# Node.js & npm. #
+######################
+
+node_modules
+npm-debug.log
+# Additional gitignore patterns from dotfiles-1 project
+# Useful `.gitignore` templates:
+# https://github.com/github/gitignore
+
+# ----------------------------------------------------------------------
+# | Linux                                                              |
+# ----------------------------------------------------------------------
+
+*~
+
+
+# ----------------------------------------------------------------------
+# | Miscellaneous                                                      |
+# ----------------------------------------------------------------------
+
+# Node.js & npm.
+
+node_modules
+npm-debug.log
+
+
+# ----------------------------------------------------------------------
+# | macOS                                                              |
+# ----------------------------------------------------------------------
+
+._*
+.AppleDouble
+.DS_Store
+.localized
+.LSOverride
+.Spotlight-V100
+.Trashes
+Icon
+
+
+# ----------------------------------------------------------------------
+# | Vim                                                                |
+# ----------------------------------------------------------------------
+
+%*
+*.sw[a-z]
+*.un~
+.netrwhist
+Session.vim
+
+
+# ----------------------------------------------------------------------
+# | Windows                                                            |
+# ----------------------------------------------------------------------
+
+Desktop.ini
+ehthumbs.db
+Thumbs.db

@@ -1,0 +1,8 @@
+user:
+  name: "Test User"
+  email: "test@example.com"
+  github_username: "testuser"
+  shell: "/bin/bash"
+preferences:
+  editor: "vim"
+  terminal: "iterm2"

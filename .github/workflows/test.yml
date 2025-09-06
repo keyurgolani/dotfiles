@@ -1,0 +1,287 @@
+name: Test Unified Dotfiles Framework
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test on ${{ matrix.os }} with ${{ matrix.shell }}
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        shell: [bash, zsh]
+        include:
+          # Test on different Ubuntu versions
+          - os: ubuntu-20.04
+            shell: bash
+          - os: ubuntu-22.04
+            shell: bash
+          # Test on different macOS versions
+          - os: macos-12
+            shell: zsh
+          - os: macos-13
+            shell: zsh
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up test environment
+      run: |
+        # Install required dependencies
+        if [[ "$RUNNER_OS" == "Linux" ]]; then
+          sudo apt-get update
+          sudo apt-get install -y curl wget git
+        elif [[ "$RUNNER_OS" == "macOS" ]]; then
+          # macOS already has curl, wget, git
+          echo "macOS environment ready"
+        fi
+    
+    - name: Install test dependencies
+      run: |
+        # Install bats testing framework
+        cd tests
+        chmod +x setup.sh
+        ./setup.sh
+    
+    - name: Set up shell environment
+      run: |
+        # Configure shell for testing
+        if [[ "${{ matrix.shell }}" == "zsh" ]]; then
+          if [[ "$RUNNER_OS" == "Linux" ]]; then
+            sudo apt-get install -y zsh
+          fi
+          # Set zsh as test shell
+          export TEST_SHELL="/bin/zsh"
+        else
+          export TEST_SHELL="/bin/bash"
+        fi
+        echo "TEST_SHELL=$TEST_SHELL" >> $GITHUB_ENV
+    
+    - name: Run unit tests
+      run: |
+        cd tests
+        export PATH="$HOME/.local/bin:$PATH"
+        bats unit/
+    
+    - name: Run integration tests
+      run: |
+        cd tests
+        export PATH="$HOME/.local/bin:$PATH"
+        bats integration/
+    
+    - name: Run platform-specific tests
+      run: |
+        cd tests
+        export PATH="$HOME/.local/bin:$PATH"
+        if [[ "$RUNNER_OS" == "Linux" ]]; then
+          # Run Ubuntu-specific tests
+          PLATFORM_OVERRIDE=ubuntu bats unit/test_platform.bats
+        elif [[ "$RUNNER_OS" == "macOS" ]]; then
+          # Run macOS-specific tests
+          PLATFORM_OVERRIDE=macos bats unit/test_platform.bats
+        fi
+    
+    - name: Test installation workflow
+      run: |
+        # Test actual installation in isolated environment
+        export TEST_MODE=true
+        export DOTFILES_BACKUP_DIR="/tmp/dotfiles_test_backup"
+        export DOTFILES_LOG_LEVEL="DEBUG"
+        
+        # Create test configuration
+        mkdir -p config
+        cat > config/modules.yaml << 'EOF'
+        modules:
+          enabled:
+            - shell
+            - git
+        settings:
+          backup_enabled: true
+          interactive_mode: false
+        EOF
+        
+        cat > config/user.yaml << 'EOF'
+        user:
+          name: "CI Test User"
+          email: "ci@example.com"
+          github_username: "ciuser"
+        EOF
+        
+        # Run installation
+        ./install.sh --non-interactive --test-mode
+    
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results-${{ matrix.os }}-${{ matrix.shell }}
+        path: |
+          tests/test-results/
+          /tmp/dotfiles_test_backup/
+          *.log
+
+  test-docker:
+    name: Test in Docker containers
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        image:
+          - ubuntu:20.04
+          - ubuntu:22.04
+          - amazonlinux:2
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Test in ${{ matrix.image }}
+      run: |
+        docker run --rm -v $PWD:/workspace -w /workspace ${{ matrix.image }} bash -c '
+          # Install basic dependencies
+          if command -v apt-get >/dev/null 2>&1; then
+            apt-get update
+            apt-get install -y curl wget git bash
+          elif command -v yum >/dev/null 2>&1; then
+            yum update -y
+            yum install -y curl wget git bash
+          fi
+          
+          # Set up test environment
+          cd tests
+          chmod +x setup.sh
+          ./setup.sh
+          
+          # Run tests
+          export PATH="$HOME/.local/bin:$PATH"
+          bats unit/test_platform.bats
+          bats unit/test_config.bats
+        '
+
+  test-wsl:
+    name: Test WSL compatibility
+    runs-on: windows-latest
+    
+    steps:
+    - name: Enable WSL
+      run: |
+        wsl --install --no-distribution
+        wsl --update
+    
+    - name: Install Ubuntu on WSL
+      run: |
+        wsl --install -d Ubuntu
+    
+    - name: Checkout code in WSL
+      run: |
+        wsl -- git clone https://github.com/${{ github.repository }}.git /tmp/dotfiles-test
+    
+    - name: Run tests in WSL
+      run: |
+        wsl -- bash -c '
+          cd /tmp/dotfiles-test
+          
+          # Install dependencies
+          sudo apt-get update
+          sudo apt-get install -y curl wget git
+          
+          # Set up test environment
+          cd tests
+          chmod +x setup.sh
+          ./setup.sh
+          
+          # Run WSL-specific tests
+          export PATH="$HOME/.local/bin:$PATH"
+          export PLATFORM_OVERRIDE=wsl
+          bats unit/test_platform.bats
+        '
+
+  lint:
+    name: Lint shell scripts
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Install ShellCheck
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y shellcheck
+    
+    - name: Run ShellCheck
+      run: |
+        find . -name "*.sh" -not -path "./tests/helpers/bats-*" | xargs shellcheck
+    
+    - name: Check script permissions
+      run: |
+        # Check that shell scripts are executable
+        find . -name "*.sh" -not -path "./tests/helpers/bats-*" -exec test -x {} \; || {
+          echo "Some shell scripts are not executable"
+          find . -name "*.sh" -not -path "./tests/helpers/bats-*" ! -executable
+          exit 1
+        }
+
+  security:
+    name: Security scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Run security scan
+      run: |
+        # Check for common security issues in shell scripts
+        grep -r "curl.*http://" . && echo "Warning: Insecure HTTP downloads found" || true
+        grep -r "wget.*http://" . && echo "Warning: Insecure HTTP downloads found" || true
+        grep -r "eval.*\$" . && echo "Warning: Potentially dangerous eval usage found" || true
+        
+        # Check for hardcoded secrets (basic check)
+        grep -r "password\|secret\|token" --include="*.sh" --include="*.yaml" . | grep -v "test" | grep -v "example" && {
+          echo "Warning: Potential hardcoded secrets found"
+          exit 1
+        } || true
+
+  coverage:
+    name: Test coverage
+    runs-on: ubuntu-latest
+    needs: [test]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y curl wget git
+        cd tests
+        ./setup.sh
+    
+    - name: Generate coverage report
+      run: |
+        cd tests
+        export PATH="$HOME/.local/bin:$PATH"
+        
+        # Run tests with coverage (using kcov if available)
+        if command -v kcov >/dev/null 2>&1; then
+          mkdir -p coverage
+          kcov --include-path=../core coverage bats unit/ integration/
+        else
+          echo "Coverage tool not available, skipping coverage report"
+        fi
+    
+    - name: Upload coverage
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: tests/coverage/

@@ -1,0 +1,22 @@
+name: "vim"
+version: "1.0.0"
+description: "Vim editor configuration with plugins and custom settings"
+category: "editor"
+dependencies: []
+platforms:
+  - macos
+  - ubuntu
+  - wsl
+  - amazon-linux
+packages:
+  macos:
+    - vim
+    - macvim
+  ubuntu:
+    - vim
+    - vim-gtk3
+files:
+  - source: "config/common/vimrc"
+    target: "~/.vimrc"
+hooks:
+  post_install: "scripts/install_plugins.sh"

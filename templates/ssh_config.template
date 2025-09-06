@@ -1,0 +1,41 @@
+# SSH Configuration Template
+# Demonstrates loop processing and conditional logic
+
+# Default settings
+Host *
+    ServerAliveInterval {{SSH_KEEPALIVE|60}}
+    ServerAliveCountMax 3
+    {{#if SSH_COMPRESSION}}
+    Compression yes
+    {{/if}}
+
+{{#if WORK_ENV}}
+# Work environment SSH configuration
+Host *.company.com
+    User {{WORK_USERNAME}}
+    IdentityFile ~/.ssh/work_rsa
+    ProxyCommand ssh -W %h:%p jump.company.com
+{{/if}}
+
+# SSH Hosts from configuration
+{{#each SSH_HOSTS}}
+Host {{name}}
+    HostName {{hostname}}
+    User {{user}}
+    Port {{port|22}}
+    {{#if key}}
+    IdentityFile {{key}}
+    {{/if}}
+    {{#if proxy}}
+    ProxyCommand {{proxy}}
+    {{/if}}
+
+{{/each}}
+
+{{#if PERSONAL_ENV}}
+# Personal environment hosts
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/personal_rsa
+{{/if}}

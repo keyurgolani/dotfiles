@@ -1,0 +1,71 @@
+# Test override configuration
+overrides:
+  platform:
+    macos:
+      modules:
+        enabled:
+          - homebrew
+          - iterm2
+      user:
+        shell: "/bin/zsh"
+      settings:
+        package_manager: "brew"
+    ubuntu:
+      modules:
+        enabled:
+          - apt-tools
+      user:
+        shell: "/bin/bash"
+      settings:
+        package_manager: "apt"
+    wsl:
+      modules:
+        enabled:
+          - wsl-utils
+      settings:
+        wsl_integration: true
+    amazon-linux:
+      modules:
+        enabled:
+          - aws-cli
+      settings:
+        package_manager: "yum"
+  
+  hostname:
+    "test-laptop":
+      modules:
+        enabled:
+          - laptop-specific
+      user:
+        email: "laptop@example.com"
+    "test-desktop":
+      modules:
+        enabled:
+          - desktop-specific
+      user:
+        email: "desktop@example.com"
+  
+  environment:
+    WORK_ENV:
+      modules:
+        enabled:
+          - work-tools
+      user:
+        email: "work@company.com"
+    DEV_ENV:
+      modules:
+        enabled:
+          - dev-tools
+      settings:
+        debug_mode: true
+  
+  conditions:
+    - condition: "test -d /opt/homebrew"
+      overrides:
+        settings:
+          homebrew_prefix: "/opt/homebrew"
+    - condition: "command -v docker >/dev/null 2>&1"
+      overrides:
+        modules:
+          enabled:
+            - docker-tools

@@ -1,0 +1,7 @@
+#!/usr/bin/env bats
+
+@test "basic functionality test" {
+    run echo "Hello, World!"
+    [ "$status" -eq 0 ]
+    [ "$output" = "Hello, World!" ]
+}

@@ -1,0 +1,25 @@
+name: "git"
+version: "1.0.0"
+description: "Git configuration with aliases, settings, and global gitignore"
+category: "vcs"
+dependencies: []
+platforms:
+  - macos
+  - ubuntu
+  - wsl
+  - amazon-linux
+packages:
+  macos:
+    - git
+    - git-lfs
+    - icdiff
+    - interactive-rebase-tool
+  ubuntu:
+    - git
+    - git-lfs
+files:
+  - source: "config/gitconfig"
+    target: "~/.gitconfig"
+    template: false
+  - source: "config/gitignore_global"
+    target: "~/.gitignore_global"

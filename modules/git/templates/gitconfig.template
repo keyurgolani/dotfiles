@@ -1,0 +1,121 @@
+# Unified Dotfiles Framework - Git Configuration
+# Generated from dotfiles project
+
+[user]
+    name = {{GIT_USER_NAME}}
+    email = {{GIT_USER_EMAIL}}
+    username = {{GIT_USERNAME}}
+    useConfigOnly = true
+    {{#if GIT_SIGNING_KEY}}
+    signingkey = {{GIT_SIGNING_KEY}}
+    {{/if}}
+
+[alias]
+    undo-all = reset --soft $(git reflog | while read line; do if [[ $line != *": commit (amend):"* ]]; then echo $line; break; fi; done | sed -e 's/\\(.*\\) HEAD@{.*}: .*:.*/\\1/')
+    undo = reset --soft HEAD@{1}
+    stash-all = stash save --include-untracked
+    hist = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    aliases = config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \\t => \\2/' | sort
+    amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
+    brname = !git branch | grep "^*" | awk '{ print $2 }'
+    details = log -n1 -p --format=fuller
+    export = archive -o latest.tar.gz -9 --prefix=latest/
+    root = rev-parse --show-toplevel
+    subup = submodule update --init
+    this = !git init && git add . && git commit -m \"Initial commit.\"
+    trim = !git reflog expire --expire=now --all && git gc --prune=now
+    push-new = push --set-upstream origin $(!git branch | grep "^*" | awk '{ print $2 }')
+
+[merge]
+    conflictstyle = diff3
+    log = true
+
+[commit]
+    {{#if GIT_GPG_SIGN}}
+    gpgSign = true
+    {{else}}
+    gpgSign = false
+    {{/if}}
+
+[push]
+    followTags = true
+
+[status]
+    showUntrackedFiles = all
+
+[transfer]
+    fsckobjects = true
+
+[credential]
+    {{#if MACOS}}
+    helper = osxkeychain
+    {{/if}}
+
+[color]
+    ui = always
+
+[color "branch"]
+    current = yellow reverse
+    local = green bold
+    remote = cyan bold
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+    newMoved = cyan
+    oldMoved = blue
+
+[color "status"]
+    added = green bold
+    changed = yellow bold
+    untracked = red bold
+
+[core]
+    editor = {{GIT_EDITOR}}
+    pager = less -FRSX
+    excludesFile = ~/.gitignore_global
+    compression = 9
+    filemode = true
+    whitespace = fix,trailing-space,cr-at-eol,tabwidth=4
+
+[web]
+    browser = {{WEB_BROWSER}}
+
+[rerere]
+    enabled = false
+    autoupdate = false
+
+[rebase]
+    autosquash = false
+
+[url "https://github.com/"]
+    insteadOf = gh:
+
+[url "https://gist.github.com/"]
+    insteadOf = gist:
+
+[url "https://bitbucket.org/"]
+    insteadOf = bb:
+
+[diff]
+    tool = {{DIFF_TOOL}}
+
+[difftool]
+    prompt = false
+
+{{#if DIFF_TOOL_ICDIFF}}
+[difftool "icdiff"]
+    cmd = /usr/local/bin/icdiff --highlight --line-numbers $LOCAL $REMOTE
+{{/if}}
+
+{{#if DIFF_TOOL_VSCODE}}
+[merge]
+    tool = vscode
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
+[difftool "default-difftool"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+{{/if}}

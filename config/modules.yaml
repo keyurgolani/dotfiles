@@ -1,0 +1,17 @@
+# Default Unified Dotfiles Framework Configuration
+modules:
+  enabled:
+    - shell
+    - git
+  disabled: []
+
+settings:
+  backup_enabled: true
+  backup_retention_days: 30
+  interactive_mode: true
+  parallel_installation: false
+
+user:
+  name: ""
+  email: ""
+  github_username: ""

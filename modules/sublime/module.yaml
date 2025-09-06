@@ -1,0 +1,14 @@
+name: "sublime"
+version: "1.0.0"
+description: "Sublime Text editor configuration and settings"
+category: "editor"
+dependencies: []
+platforms:
+  - macos
+  - ubuntu
+  - wsl
+packages:
+  macos:
+    - sublime-text
+  ubuntu:
+    - sublime-text

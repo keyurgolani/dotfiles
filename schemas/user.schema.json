@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "User Configuration Schema",
+  "description": "Schema for validating user.yaml configuration",
+  "type": "object",
+  "properties": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User's full name",
+          "minLength": 1
+        },
+        "email": {
+          "type": "string",
+          "description": "User's email address",
+          "format": "email"
+        },
+        "github_username": {
+          "type": "string",
+          "description": "GitHub username",
+          "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-])*[a-zA-Z0-9]$"
+        },
+        "shell": {
+          "type": "string",
+          "description": "Preferred shell",
+          "enum": ["bash", "zsh", "fish", "sh"]
+        },
+        "editor": {
+          "type": "string",
+          "description": "Preferred editor"
+        },
+        "timezone": {
+          "type": "string",
+          "description": "User's timezone"
+        }
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "properties": {
+        "theme": {
+          "type": "string",
+          "description": "Preferred theme",
+          "enum": ["light", "dark", "auto"]
+        },
+        "color_scheme": {
+          "type": "string",
+          "description": "Color scheme preference"
+        },
+        "font_family": {
+          "type": "string",
+          "description": "Preferred font family"
+        },
+        "font_size": {
+          "type": "integer",
+          "description": "Font size",
+          "minimum": 8,
+          "maximum": 72
+        }
+      }
+    },
+    "modules": {
+      "type": "object",
+      "description": "User-specific module overrides",
+      "properties": {
+        "enabled": {
+          "type": "array",
+          "description": "Additional modules to enable",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "uniqueItems": true
+        },
+        "disabled": {
+          "type": "array",
+          "description": "Modules to disable",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "settings": {
+      "type": "object",
+      "description": "User-specific setting overrides",
+      "properties": {
+        "backup_enabled": {
+          "type": "boolean",
+          "description": "Enable backup of existing files"
+        },
+        "interactive_mode": {
+          "type": "boolean",
+          "description": "Enable interactive prompts"
+        },
+        "log_level": {
+          "type": "string",
+          "description": "Logging level",
+          "enum": ["error", "warn", "info", "debug"]
+        }
+      }
+    }
+  }
+}

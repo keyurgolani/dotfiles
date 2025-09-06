@@ -1,0 +1,74 @@
+# Vars
+	HISTFILE=~/.zsh_history
+	SAVEHIST=1000 
+	setopt inc_append_history # To save every command before it is executed 
+	setopt share_history # setopt inc_append_history
+
+# Create log directory
+	mkdir -p /tmp/log
+
+# Settings
+	export VISUAL=vim
+
+# Detect dotfiles directory location
+source "${BASH_SOURCE[0]%/*}/common/dotfiles_path.sh" 2>/dev/null || {
+    # Fallback if detection script is not available
+    export DOTFILES_DIR="${DOTFILES_ROOT:-$HOME/dotfiles}"
+}
+
+source "$DOTFILES_DIR/modules/shell/config/common/plugins/fixls.zsh"
+
+#Functions
+	# Loop a command and show the output in vim
+	loop() {
+		echo ":cq to quit" > /tmp/log/output 
+		fc -ln -1 > /tmp/log/program
+		while true; do
+			cat /tmp/log/program >> /tmp/log/output 2>>&1 ;
+			$(cat /tmp/log/program) >> /tmp/log/output 2>>&1 ;
+			echo '\n' >> /tmp/log/output
+			vim + /tmp/log/output || break;
+		done;
+		rm -rf /tmp/log/output
+	}
+
+	# Custom cd
+	c() {
+		cd $1;
+		ls;
+	}
+	# Note: 'cd' alias moved to aliases file
+
+# For vim mappings: 
+	stty -ixon
+
+# Load available plugins and configurations
+[[ -f "$DOTFILES_DIR/modules/shell/config/common/plugins/vi-mode.plugin.zsh" ]] && source "$DOTFILES_DIR/modules/shell/config/common/plugins/vi-mode.plugin.zsh"
+[[ -f "$DOTFILES_DIR/modules/shell/config/common/keybindings" ]] && source "$DOTFILES_DIR/modules/shell/config/common/keybindings"
+
+# Load oh-my-zsh plugins if available (optional dependencies)
+# To install: run $DOTFILES_DIR/module_cli.sh shell install-plugins
+[[ -f ~/.oh-my-zsh/lib/history.zsh ]] && source ~/.oh-my-zsh/lib/history.zsh
+[[ -f ~/.oh-my-zsh/lib/key-bindings.zsh ]] && source ~/.oh-my-zsh/lib/key-bindings.zsh
+[[ -f ~/.oh-my-zsh/lib/completion.zsh ]] && source ~/.oh-my-zsh/lib/completion.zsh
+
+# Load additional plugins if available (optional dependencies)
+# To install: run $DOTFILES_DIR/module_cli.sh shell install-plugins
+[[ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ -f ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Fix for arrow-key searching
+# start typing + [Up-Arrow] - fuzzy find history forward
+if [[ "${terminfo[kcuu1]}" != "" ]]; then
+	autoload -U up-line-or-beginning-search
+	zle -N up-line-or-beginning-search
+	bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
+# start typing + [Down-Arrow] - fuzzy find history backward
+if [[ "${terminfo[kcud1]}" != "" ]]; then
+	autoload -U down-line-or-beginning-search
+	zle -N down-line-or-beginning-search
+	bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+fi
+
+[[ -f "$DOTFILES_DIR/modules/shell/config/common/prompt" ]] && source "$DOTFILES_DIR/modules/shell/config/common/prompt"

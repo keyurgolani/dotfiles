@@ -1,0 +1,13 @@
+name: "iterm"
+version: "1.0.0"
+description: "iTerm2 terminal configuration and preferences"
+category: "terminal"
+dependencies: []
+platforms:
+  - macos
+packages:
+  macos:
+    - iterm2
+files:
+  - source: "config/macos/Default.json"
+    target: "~/Library/Application Support/iTerm2/DynamicProfiles/Default.json"

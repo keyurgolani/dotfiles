@@ -1,0 +1,348 @@
+#!/usr/bin/env bash
+
+# =============================================================================
+# Development Aliases
+# =============================================================================
+# This file contains aliases for development tools and workflows
+
+# =============================================================================
+# VERSION CONTROL (GIT)
+# =============================================================================
+
+# Basic git operations
+alias g='git'
+alias gst='git status'
+alias gs='git status -s'
+alias gss='git status -s'
+
+# Branch operations
+alias gb='git branch'
+alias gba='git branch -a'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gcm='git checkout main'
+alias gcd='git checkout develop'
+
+# Commit operations
+alias ga='git add'
+alias gaa='git add -A'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gca='git commit -a'
+alias gcam='git commit -am'
+alias gcan='git commit --amend --no-edit'
+
+# Push/Pull operations
+alias gp='git push'
+alias gpo='git push origin'
+alias gph='git push origin HEAD'
+alias gpl='git pull'
+alias gf='git fetch'
+alias gfa='git fetch --all'
+
+# Log and diff
+alias gl='git log'
+alias glo='git log --oneline'
+alias glp='git log --pretty --oneline'
+alias glt='git log --all --graph --decorate --oneline --simplify-by-decoration'
+alias gd='git diff'
+alias gdc='git diff --cached'
+
+# Stash operations
+alias gst='git stash'
+alias gstp='git stash pop'
+alias gstl='git stash list'
+
+# Merge and rebase
+alias gm='git merge'
+alias gr='git rebase'
+alias gri='git rebase -i'
+
+# Remote operations
+alias gra='git remote add'
+alias grv='git remote -v'
+
+# Useful git shortcuts
+alias gwip='git add -A && git commit -m "WIP"'
+alias gunwip='git log -n 1 | grep -q -c "WIP" && git reset HEAD~1'
+alias gclean='git clean -fd'
+alias greset='git reset --hard HEAD'
+
+# =============================================================================
+# NODE.JS & NPM
+# =============================================================================
+
+alias n='npm'
+alias ni='npm install'
+alias nid='npm install --save-dev'
+alias nig='npm install -g'
+alias nr='npm run'
+alias ns='npm start'
+alias nt='npm test'
+alias nb='npm run build'
+alias nw='npm run watch'
+alias ndev='npm run dev'
+alias nprod='npm run prod'
+alias nls='npm list'
+alias nout='npm outdated'
+alias nup='npm update'
+
+# Yarn alternatives
+alias y='yarn'
+alias ya='yarn add'
+alias yad='yarn add --dev'
+alias yr='yarn run'
+alias ys='yarn start'
+alias yt='yarn test'
+alias yb='yarn build'
+alias yw='yarn watch'
+alias ydev='yarn dev'
+alias yprod='yarn prod'
+alias yls='yarn list'
+alias yout='yarn outdated'
+alias yup='yarn upgrade'
+
+# =============================================================================
+# PYTHON
+# =============================================================================
+
+alias py='python3'
+alias py2='python2'
+alias pip='pip3'
+alias pip2='pip2'
+
+# Virtual environments
+alias venv='python3 -m venv'
+alias activate='source venv/bin/activate'
+alias deactivate='deactivate'
+
+# Django
+alias dj='python manage.py'
+alias djrun='python manage.py runserver'
+alias djmig='python manage.py migrate'
+alias djmake='python manage.py makemigrations'
+alias djshell='python manage.py shell'
+alias djtest='python manage.py test'
+
+# Flask
+alias flask='python -m flask'
+alias flaskrun='flask run'
+
+# =============================================================================
+# DOCKER
+# =============================================================================
+
+if command -v docker >/dev/null 2>&1; then
+    alias d='docker'
+    alias dc='docker-compose'
+    alias dcu='docker-compose up'
+    alias dcd='docker-compose down'
+    alias dcb='docker-compose build'
+    alias dcr='docker-compose restart'
+    alias dps='docker ps'
+    alias dpa='docker ps -a'
+    alias di='docker images'
+    alias drmi='docker rmi'
+    alias drmf='docker rm -f'
+    alias dlog='docker logs'
+    alias dlogf='docker logs -f'
+    alias dexec='docker exec -it'
+    alias drun='docker run -it --rm'
+    alias dstop='docker stop'
+    alias dstart='docker start'
+    alias drestart='docker restart'
+    alias dclean='docker system prune -f'
+    alias dcleanall='docker system prune -af'
+fi
+
+# =============================================================================
+# KUBERNETES
+# =============================================================================
+
+if command -v kubectl >/dev/null 2>&1; then
+    alias k='kubectl'
+    alias kgp='kubectl get pods'
+    alias kgs='kubectl get services'
+    alias kgd='kubectl get deployments'
+    alias kgn='kubectl get nodes'
+    alias kdp='kubectl describe pod'
+    alias kds='kubectl describe service'
+    alias kdd='kubectl describe deployment'
+    alias kdn='kubectl describe node'
+    alias kl='kubectl logs'
+    alias klf='kubectl logs -f'
+    alias ke='kubectl exec -it'
+    alias ka='kubectl apply -f'
+    alias kd='kubectl delete'
+    alias kctx='kubectl config current-context'
+    alias kns='kubectl config set-context --current --namespace'
+fi
+
+# =============================================================================
+# TERRAFORM
+# =============================================================================
+
+if command -v terraform >/dev/null 2>&1; then
+    alias tf='terraform'
+    alias tfi='terraform init'
+    alias tfp='terraform plan'
+    alias tfa='terraform apply'
+    alias tfd='terraform destroy'
+    alias tfv='terraform validate'
+    alias tff='terraform fmt'
+    alias tfs='terraform show'
+    alias tfo='terraform output'
+fi
+
+# =============================================================================
+# AWS CLI
+# =============================================================================
+
+if command -v aws >/dev/null 2>&1; then
+    alias awsp='aws --profile'
+    alias awsr='aws --region'
+    alias s3ls='aws s3 ls'
+    alias s3cp='aws s3 cp'
+    alias s3sync='aws s3 sync'
+    alias ec2ls='aws ec2 describe-instances'
+    alias lambdals='aws lambda list-functions'
+fi
+
+# =============================================================================
+# DEVELOPMENT SERVERS
+# =============================================================================
+
+# HTTP servers
+alias serve='python -m http.server 8000'
+alias serve3000='python -m http.server 3000'
+alias serve8080='python -m http.server 8080'
+alias servehttp='python -m SimpleHTTPServer 8000'
+
+# PHP server (if available)
+if command -v php >/dev/null 2>&1; then
+    alias phpserve='php -S localhost:8000'
+fi
+
+# Ruby server (if available)
+if command -v ruby >/dev/null 2>&1; then
+    alias rubyserve='ruby -run -e httpd . -p 8000'
+fi
+
+# =============================================================================
+# DATABASE
+# =============================================================================
+
+# MySQL/MariaDB
+if command -v mysql >/dev/null 2>&1; then
+    alias mysql='mysql -u root -p'
+fi
+
+# PostgreSQL
+if command -v psql >/dev/null 2>&1; then
+    alias psql='psql -U postgres'
+fi
+
+# MongoDB
+if command -v mongo >/dev/null 2>&1; then
+    alias mongo='mongo --quiet'
+fi
+
+# Redis
+if command -v redis-cli >/dev/null 2>&1; then
+    alias redis='redis-cli'
+fi
+
+# =============================================================================
+# BUILD TOOLS
+# =============================================================================
+
+# Make
+alias m='make'
+alias mc='make clean'
+alias mi='make install'
+
+# Gradle
+if command -v gradle >/dev/null 2>&1; then
+    alias gw='./gradlew'
+    alias gwb='./gradlew build'
+    alias gwt='./gradlew test'
+    alias gwr='./gradlew run'
+    alias gwc='./gradlew clean'
+fi
+
+# Maven
+if command -v mvn >/dev/null 2>&1; then
+    alias mvnc='mvn clean'
+    alias mvnci='mvn clean install'
+    alias mvnct='mvn clean test'
+    alias mvncp='mvn clean package'
+fi
+
+# =============================================================================
+# TESTING
+# =============================================================================
+
+# Jest
+alias jest='npx jest'
+alias jestw='npx jest --watch'
+
+# Pytest
+alias pytest='python -m pytest'
+alias pt='pytest'
+alias ptv='pytest -v'
+alias pts='pytest -s'
+
+# =============================================================================
+# LINTING & FORMATTING
+# =============================================================================
+
+# ESLint
+alias lint='npx eslint'
+alias lintfix='npx eslint --fix'
+
+# Prettier
+alias prettier='npx prettier'
+alias prettierw='npx prettier --write'
+
+# Black (Python)
+if command -v black >/dev/null 2>&1; then
+    alias black='black .'
+fi
+
+# =============================================================================
+# PROJECT SHORTCUTS
+# =============================================================================
+
+# Common project commands
+alias start='npm start'
+alias dev='npm run dev'
+alias build='npm run build'
+alias test='npm test'
+alias lint='npm run lint'
+
+# =============================================================================
+# EDITOR SHORTCUTS
+# =============================================================================
+
+# Editor shortcuts
+alias c='code'
+alias code='code .'
+alias subl='subl .'
+alias atom='atom .'
+
+# Vim shortcuts
+alias v='vim'
+alias vi='vim'
+alias nv='nvim'
+
+# =============================================================================
+# TMUX
+# =============================================================================
+
+if command -v tmux >/dev/null 2>&1; then
+    alias t='tmux'
+    alias ta='tmux attach'
+    alias tl='tmux list-sessions'
+    alias tn='tmux new-session'
+    alias tk='tmux kill-session'
+fi

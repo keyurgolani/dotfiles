@@ -1,0 +1,30 @@
+# Work environment overrides
+# This configuration is applied when WORK_ENV environment variable is set
+
+modules:
+  enabled:
+    - corporate-vpn
+    - work-tools
+    - security-tools
+  disabled:
+    - personal-tools
+    - gaming-tools
+
+settings:
+  git_signing_required: true
+  backup_to_corporate: true
+  security_enhanced: true
+
+user:
+  email: "${WORK_EMAIL}"
+  git_signing_key: "${WORK_GPG_KEY}"
+  
+# Work-specific git configuration
+git:
+  user:
+    email: "${WORK_EMAIL}"
+  commit:
+    gpgsign: true
+  url:
+    "git@github-work:":
+      insteadOf: "git@github.com:"

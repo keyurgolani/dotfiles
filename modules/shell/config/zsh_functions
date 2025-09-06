@@ -1,0 +1,95 @@
+# Unified Dotfiles Framework - ZSH Functions
+# Consolidated from zsh_dotfiles and other projects
+# This file supports environment variable substitution
+
+# Include all bash functions for compatibility
+if [[ -f "$HOME/.bash_functions" ]]; then
+    source "$HOME/.bash_functions"
+fi
+
+# ZSH specific functions from zsh_dotfiles project
+
+# Custom cd with ls (enhanced for zsh)
+c() {
+    cd "$1" || return 1
+    ls
+}
+
+# Loop command with vim output (from zsh_dotfiles)
+loop() {
+    mkdir -p /tmp/log
+    echo ":cq to quit" > /tmp/log/output 
+    fc -ln -1 > /tmp/log/program
+    while true; do
+        cat /tmp/log/program >> /tmp/log/output 2>&1
+        $(cat /tmp/log/program) >> /tmp/log/output 2>&1
+        echo '\n' >> /tmp/log/output
+        vim + /tmp/log/output || break
+    done
+    rm -rf /tmp/log/output
+}
+
+# ZSH specific directory functions
+# Take - create directory and cd into it (zsh built-in enhancement)
+take() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# ZSH history functions
+# Search history with fzf if available
+if command -v fzf >/dev/null 2>&1; then
+    fh() {
+        print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+    }
+fi
+
+# ZSH completion functions
+# Reload completions
+reload-completions() {
+    autoload -U compinit
+    compinit
+}
+
+# ZSH prompt functions
+# Get git branch for prompt
+git_prompt_info() {
+    local branch=$(git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3)
+    if [[ -n $branch ]]; then
+        echo " ($branch)"
+    fi
+}
+
+# ZSH utility functions
+# Quick edit of zsh config
+zshconfig() {
+    $EDITOR ~/.zshrc
+}
+
+# Quick edit of zsh aliases
+aliasconfig() {
+    $EDITOR ~/.zsh_aliases
+}
+
+# ZSH performance profiling
+zsh-profile() {
+    zsh -i -c exit
+}
+
+# ZSH plugin management helpers
+zsh-update-plugins() {
+    if [[ -d "$ZSH" ]]; then
+        cd "$ZSH" && git pull
+        cd - > /dev/null
+    fi
+}
+
+# ZSH theme switching
+switch-theme() {
+    if [[ -n "$1" ]]; then
+        sed -i.bak "s/ZSH_THEME=\".*\"/ZSH_THEME=\"$1\"/" ~/.zshrc
+        source ~/.zshrc
+        echo "Switched to theme: $1"
+    else
+        echo "Usage: switch-theme <theme-name>"
+    fi
+}

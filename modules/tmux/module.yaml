@@ -1,0 +1,19 @@
+name: "tmux"
+version: "1.0.0"
+description: "Tmux terminal multiplexer configuration"
+category: "terminal"
+dependencies: []
+platforms:
+  - macos
+  - ubuntu
+  - wsl
+  - amazon-linux
+packages:
+  macos:
+    - tmux
+    - reattach-to-user-namespace
+  ubuntu:
+    - tmux
+files:
+  - source: "config/common/tmux.conf"
+    target: "~/.tmux.conf"

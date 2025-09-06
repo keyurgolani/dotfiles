@@ -1,0 +1,63 @@
+# Example Template Context File
+# This file demonstrates how to provide context variables for templates
+
+# User information
+GIT_USER_NAME: "John Doe"
+GIT_USER_EMAIL: "john.doe@example.com"
+GIT_EDITOR: "code --wait"
+GIT_SIGNING_KEY: "ABC123DEF456"
+
+# Environment settings
+WORK_ENV: "true"
+PERSONAL_ENV: "false"
+COMPANY_NAME: "Acme Corp"
+WORK_EMAIL: "john.doe@acme.com"
+WORK_USERNAME: "jdoe"
+WORK_SERVER: "dev.acme.com"
+VPN_SERVER: "vpn.acme.com"
+
+# SSH configuration
+SSH_KEEPALIVE: "30"
+SSH_COMPRESSION: "true"
+
+# SSH hosts array (flattened for simple parser)
+SSH_HOSTS_COUNT: "3"
+SSH_HOSTS_0: "production"
+SSH_HOSTS_0_name: "production"
+SSH_HOSTS_0_hostname: "prod.acme.com"
+SSH_HOSTS_0_user: "deploy"
+SSH_HOSTS_0_port: "22"
+SSH_HOSTS_0_key: "~/.ssh/prod_rsa"
+
+SSH_HOSTS_1: "staging"
+SSH_HOSTS_1_name: "staging"
+SSH_HOSTS_1_hostname: "staging.acme.com"
+SSH_HOSTS_1_user: "deploy"
+SSH_HOSTS_1_port: "2222"
+SSH_HOSTS_1_key: "~/.ssh/staging_rsa"
+
+SSH_HOSTS_2: "development"
+SSH_HOSTS_2_name: "development"
+SSH_HOSTS_2_hostname: "dev.acme.com"
+SSH_HOSTS_2_user: "jdoe"
+SSH_HOSTS_2_port: "22"
+SSH_HOSTS_2_proxy: "ssh -W %h:%p jump.acme.com"
+
+# ZSH configuration
+HISTSIZE: "50000"
+SAVEHIST: "50000"
+ENABLE_HISTORY_SHARING: "true"
+ENABLE_AUTOSUGGESTIONS: "true"
+ENABLE_ADVANCED_ALIASES: "true"
+
+# ZSH plugins array
+ZSH_PLUGINS_COUNT: "4"
+ZSH_PLUGINS_0: "git"
+ZSH_PLUGINS_1: "docker"
+ZSH_PLUGINS_2: "kubectl"
+ZSH_PLUGINS_3: "aws"
+
+# Platform-specific settings
+HOMEBREW_PREFIX: "/opt/homebrew"
+MACOS_BROWSER: "Google Chrome"
+LINUX_BROWSER: "firefox"

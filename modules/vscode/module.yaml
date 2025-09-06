@@ -1,0 +1,20 @@
+name: "vscode"
+version: "1.0.0"
+description: "Visual Studio Code configuration and settings"
+category: "editor"
+dependencies: []
+platforms:
+  - macos
+  - ubuntu
+  - wsl
+packages:
+  macos:
+    - visual-studio-code
+  ubuntu:
+    - code
+files:
+  - source: "config/common/settings.json"
+    target: "~/Library/Application Support/Code/User/settings.json"
+    platform_targets:
+      ubuntu: "~/.config/Code/User/settings.json"
+      wsl: "~/.config/Code/User/settings.json"

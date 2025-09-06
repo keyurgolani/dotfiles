@@ -1,0 +1,23 @@
+# Conditional override when Docker is available
+# This configuration is applied when Docker is installed and available
+
+condition: "command -v docker >/dev/null 2>&1"
+
+overrides:
+  modules:
+    enabled:
+      - docker-tools
+      - container-utils
+    disabled: []
+  
+  settings:
+    docker_available: true
+    container_support: true
+  
+  # Docker-specific aliases and functions
+  shell:
+    aliases:
+      dps: "docker ps"
+      dimg: "docker images"
+      drun: "docker run -it --rm"
+      dexec: "docker exec -it"

@@ -1,0 +1,58 @@
+# Unified Dotfiles Framework - ZSH Configuration
+# Generated from dotfiles project
+
+include () {
+    [[ -f "$1" ]] && source "$1"
+}
+
+# Path configuration
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Autojump integration
+{{#if AUTOJUMP_ENABLED}}
+include /usr/local/etc/profile.d/autojump.sh
+{{/if}}
+
+# Ruby configuration (if installed via Homebrew)
+{{#if HOMEBREW_RUBY}}
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/ruby/lib"
+export CPPFLAGS="-I/usr/local/opt/ruby/include"
+{{/if}}
+
+# Oh My Zsh configuration
+export ZSH=$HOME/.oh-my-zsh
+ZSH_THEME="{{ZSH_THEME}}"
+
+# Performance optimizations
+DISABLE_AUTO_UPDATE="true"
+DISABLE_UPDATE_PROMPT="true"
+
+# Plugin configuration
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
+plugins=({{ZSH_PLUGINS}})
+
+# Load Oh My Zsh
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='{{EDITOR}}'
+fi
+
+# Load custom configurations
+include ~/.aliases
+include ~/.functions  
+include ~/.exports
+
+# Load local overrides
+include ~/.local_overrides
+
+# Terminal preferences
+bindkey "^T" push-line-or-edit
+ENABLE_CORRECTION="true"

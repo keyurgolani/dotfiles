@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Modules Configuration Schema",
+  "description": "Schema for validating modules.yaml configuration",
+  "type": "object",
+  "required": ["modules", "settings"],
+  "properties": {
+    "modules": {
+      "type": "object",
+      "required": ["enabled"],
+      "properties": {
+        "enabled": {
+          "type": "array",
+          "description": "List of enabled modules",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "uniqueItems": true
+        },
+        "disabled": {
+          "type": "array",
+          "description": "List of disabled modules",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "uniqueItems": true,
+          "default": []
+        }
+      }
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "backup_enabled": {
+          "type": "boolean",
+          "description": "Enable backup of existing files",
+          "default": true
+        },
+        "backup_retention_days": {
+          "type": "integer",
+          "description": "Number of days to retain backups",
+          "minimum": 1,
+          "maximum": 365,
+          "default": 30
+        },
+        "interactive_mode": {
+          "type": "boolean",
+          "description": "Enable interactive prompts",
+          "default": true
+        },
+        "parallel_installation": {
+          "type": "boolean",
+          "description": "Enable parallel module installation",
+          "default": false
+        },
+        "log_level": {
+          "type": "string",
+          "description": "Logging level",
+          "enum": ["error", "warn", "info", "debug"],
+          "default": "info"
+        },
+        "dry_run": {
+          "type": "boolean",
+          "description": "Perform dry run without making changes",
+          "default": false
+        }
+      }
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User's full name"
+        },
+        "email": {
+          "type": "string",
+          "description": "User's email address",
+          "format": "email"
+        },
+        "github_username": {
+          "type": "string",
+          "description": "GitHub username",
+          "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-])*[a-zA-Z0-9]$"
+        }
+      }
+    }
+  }
+}

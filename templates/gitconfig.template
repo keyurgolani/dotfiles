@@ -1,0 +1,45 @@
+# Git Configuration Template
+# This template demonstrates the template engine capabilities
+
+[user]
+    name = {{GIT_USER_NAME}}
+    email = {{GIT_USER_EMAIL}}
+    {{#if GIT_SIGNING_KEY}}
+    signingkey = {{GIT_SIGNING_KEY}}
+    {{/if}}
+
+[core]
+    editor = {{GIT_EDITOR|vim}}
+    {{#if WORK_ENV}}
+    # Work environment specific settings
+    autocrlf = true
+    {{else}}
+    # Personal environment settings
+    autocrlf = input
+    {{/if}}
+
+[push]
+    default = {{GIT_PUSH_DEFAULT|simple}}
+
+{{#if WORK_ENV}}
+[url "git@github-work:"]
+    insteadOf = git@github.com:
+{{/if}}
+
+# SSH Hosts Configuration
+{{#each SSH_HOSTS}}
+# Host: {{name}}
+[url "{{protocol}}://{{hostname}}/"]
+    insteadOf = {{shortcut}}:
+{{/each}}
+
+[alias]
+    # Basic shortcuts
+    st = status
+    co = checkout
+    br = branch
+    {{#if ENABLE_ADVANCED_ALIASES}}
+    # Advanced aliases for power users
+    lg = log --oneline --graph --decorate --all
+    unstage = reset HEAD --
+    {{/if}}

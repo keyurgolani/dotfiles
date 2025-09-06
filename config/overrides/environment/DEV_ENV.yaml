@@ -1,0 +1,31 @@
+# Development environment overrides
+# This configuration is applied when DEV_ENV environment variable is set
+
+modules:
+  enabled:
+    - development-tools
+    - debugging-tools
+    - performance-tools
+    - docker-tools
+  disabled: []
+
+settings:
+  verbose_logging: true
+  debug_mode: true
+  performance_monitoring: true
+
+user:
+  development_mode: true
+
+# Development-specific configurations
+shell:
+  aliases:
+    ll: "ls -la"
+    grep: "grep --color=auto"
+    dev: "cd $DEV_WORKSPACE"
+  
+git:
+  core:
+    editor: "${EDITOR:-vim}"
+  push:
+    default: "current"

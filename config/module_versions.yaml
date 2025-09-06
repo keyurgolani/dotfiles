@@ -1,0 +1,7 @@
+# Module Version Tracking
+# This file tracks the versions of installed modules
+
+framework_version: "1.0.0"
+modules: {}
+  test_module: "1.0.0"
+last_updated: "2025-08-28T15:28:52Z"

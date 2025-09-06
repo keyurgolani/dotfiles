@@ -1,0 +1,20 @@
+# =============================================================================
+# ZSH Specific Aliases (DEPRECATED)
+# =============================================================================
+# This file is deprecated. All aliases have been moved to the new organized
+# alias system in modules/shell/config/common/aliases*
+#
+# The new system provides:
+# - Better organization by category
+# - Platform-specific aliases
+# - No duplicates
+# - Easier maintenance
+#
+# This file is kept for backward compatibility but should not be used.
+# All functionality has been moved to:
+# - modules/shell/config/common/aliases_new (core aliases)
+# - modules/shell/config/common/aliases_macos (macOS specific)
+# - modules/shell/config/common/aliases_linux (Linux specific)  
+# - modules/shell/config/common/aliases_dev (development tools)
+
+echo "⚠️  WARNING: zsh_aliases is deprecated. Using new organized alias system."

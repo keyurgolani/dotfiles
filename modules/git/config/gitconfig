@@ -1,0 +1,253 @@
+[alias]
+	undo-all = reset --soft $(git reflog | while read line; do if [[ $line != *": commit (amend):"* ]]; then echo $line; break; fi; done | sed -e 's/\(.*\) HEAD@{.*}: .*:.*/\1/')
+	# Undo all amends on latest commit
+
+	undo = reset --soft HEAD@{1}
+	# Undo only last amend
+	# There is no easy way to undo an amend
+	# https://git-scm.com/docs/git-reset#git-reset-emgitresetemltmodegtltcommitgt
+
+	stash-all = stash save --include-untracked
+	# I always want to add all untracked files too
+	# https://git-scm.com/docs/git-stash
+
+	hist = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	# No need for a GUI - a nice, colorful, graphical representation
+	# https://git-scm.com/docs/git-log
+	# via https://medium.com/@payload.dd/thanks-for-the-git-st-i-will-use-this-4da5839a21a4
+
+	aliases = config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
+	# Show all of my configured aliases
+
+	amend = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
+	# For when you made that commit a bit too early, amend
+
+	brname = !git branch | grep "^*" | awk '{ print $2 }'
+	# Show the current branch name (usefull for shell prompts)
+
+	churn = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
+	# TODO: This doesn't work right now.
+	# Which files are receiving the most "love". Because...why not! ;)
+
+	details = log -n1 -p --format=fuller
+	# View the log and diff for a commit (previous if no SHA1 provided)
+
+	export = archive -o latest.tar.gz -9 --prefix=latest/
+	# Save a repo as a tarball
+
+	list = "!f() { git log $* | grep '^commit ' | cut -f 2 -d ' '; }; f"
+	# TODO: Want just the SHA1s and ignore commit messages?
+	# Return a list of commit SHA1s
+
+	root = rev-parse --show-toplevel
+	# Return the repository's root directory (usefull for shell prompts)
+
+	subup = submodule update --init
+	# Update all submodules coz I never remember this.
+
+	this = !git init && git add . && git commit -m \"Initial commit.\"
+	# Start a new local repository and perform initial commit
+
+	trim = !git reflog expire --expire=now --all && git gc --prune=now
+	# Thin out older metadata within the repository, reduceses filesystem footprint
+
+	push-new = push --set-upstream origin $(!git branch | grep "^*" | awk '{ print $2 }')
+	# Push a new branch to origin and set the same branch name on upstream too
+
+
+[merge]
+	# ff = only | false | true
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergeff
+
+	conflictstyle = diff3
+	# Standard diff is two sets of final changes. This introduces the original text before each side's changes.
+	# https://git-scm.com/docs/git-config#git-config-mergeconflictStyle
+
+	log = true
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-mergelog
+
+
+[commit]
+	gpgSign = false
+	# TODO: Change to true after adding gpg sign
+	# "other people can trust that the changes you've made really were made by you"
+	# https://help.github.com/articles/about-gpg/
+	# https://git-scm.com/docs/git-config#git-config-commitgpgSign
+
+
+[push]
+	# default = nothing | current | upstream | tracking | simple | matching
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
+
+	followTags = true
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushfollowTags
+
+
+[status]
+	showUntrackedFiles = all
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-statusshowUntrackedFiles
+
+
+[transfer]
+	fsckobjects = true
+	# To combat repository corruption!
+	# Note: this global option applies during receive and transmit
+	# https://git-scm.com/docs/git-config#git-config-transferfsckObjects
+	# via https://groups.google.com/forum/#!topic/binary-transparency/f-BI4o8HZW0
+
+
+# Credential helper will be set by platform-specific configuration
+# macOS: osxkeychain, Linux: store or cache
+
+
+[color]
+	ui = always
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-colorui
+
+
+[color "branch"]
+    current = yellow reverse
+
+	local = green bold
+
+	remote = cyan bold
+
+
+[color "diff"]
+    meta = yellow bold
+
+	frag = magenta bold
+
+	old = red bold
+
+	new = green bold
+
+	whitespace = red reverse
+
+    newMoved = cyan
+
+	oldMoved = blue
+
+
+[color "status"]
+    added = green bold
+
+	changed = yellow bold
+
+	untracked = red bold
+
+
+[gitflow "prefix"]
+	feature = feature-
+
+	release = release-
+
+	hotfix = hotfix-
+
+	support = support-
+
+	versiontag = v
+
+
+[sequence]
+	editor = interactive-rebase-tool
+
+
+[core]
+	editor = code --wait
+
+	pager = less -FRSX
+	# lets you tweak the default pager
+    # see `man less` for the meaning of these flags
+
+	excludesFile = ~/.gitignore_global
+	# lets you define a global .gitignore for all those
+    # *.swp, *~, *.o, etc things that you're frequently
+    # sticking in .gitignore
+    # autocrlf = true
+	# if you use windows
+
+	compression = 9
+	# Use aggressive compression. Avoid this for corporate level large monoliths.
+    # can make your repo smaller but can also be slow
+
+	filemode = true
+	# Some shell scripts are committed and should retain their executable status.
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-corefileMode
+
+	whitespace = fix,trailing-space,cr-at-eol,tabwidth=4
+	# This one is not that straight forward. Probably should check the below ling and decide which ones to include.
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-corewhitespace
+
+
+# User configuration will be set by the framework
+# Run: git config --global user.name "Your Name"
+# Run: git config --global user.email "your.email@example.com"
+[user]
+	useConfigOnly = true
+
+
+[web]
+	browser = google-chrome
+
+
+[instaweb]
+	httpd = apache2 -f
+
+
+[rerere]
+    enabled = false
+
+	autoupdate = false
+    # Partial merge choices and replays them next time
+	# Not sure if I would want to act the same with same partial conflicts in different usecases
+
+
+[rebase]
+    autosquash = false
+	# Too much work to fit this in my workflow.
+
+
+[url "https://github.com/"]
+    insteadOf = gh:
+
+
+[url "https://gist.github.com/"]
+    insteadOf = gist:
+
+
+[url "https://bitbucket.org/"]
+    insteadOf = bb:
+
+
+[diff]
+	tool = icdiff
+
+[difftool]
+	prompt = false
+
+[difftool "icdiff"]
+	cmd = /usr/local/bin/icdiff --highlight --line-numbers $LOCAL $REMOTE
+# A nice little github-like colorful, split diff right in the console.
+# via http://owen.cymru/github-style-diff-in-terminal-with-icdiff/
+
+
+# [merge]
+#     tool = kdiff3
+# [mergetool "kdiff3"]
+#     keepBackup = false
+#     trustExitCode = false
+# [diff]
+#     tool = kdiff3
+# 	mnemonicprefix = true
+# If you're interested in gui diff tool kdiff3
+
+
+[merge]
+     tool = vscode
+[mergetool "vscode"]
+     cmd = code --wait $MERGED
+[diff]
+     tool = default-difftool
+[difftool "default-difftool"]
+     cmd = code --wait --diff $LOCAL $REMOTE

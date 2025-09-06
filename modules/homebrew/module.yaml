@@ -1,0 +1,25 @@
+name: "homebrew"
+version: "1.0.0"
+description: "Homebrew package manager setup and essential packages"
+category: "package-manager"
+dependencies: []
+platforms:
+  - macos
+packages:
+  macos:
+    - ruby
+    - autojump
+    - vim
+    - tmux
+    - reattach-to-user-namespace
+    - go
+    - apache2
+    - tmux-xpanes
+    - python
+    - mas
+    - tldr
+    - icdiff
+    - interactive-rebase-tool
+hooks:
+  pre_install: "scripts/install_homebrew.sh"
+  post_install: "scripts/install_essentials.sh"

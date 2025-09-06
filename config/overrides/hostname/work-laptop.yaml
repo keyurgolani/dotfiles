@@ -1,0 +1,43 @@
+# Hostname-specific overrides for work laptop
+# This configuration extends the work configuration for the specific laptop
+
+extends: "../work.yaml"
+
+modules:
+  enabled:
+    - shell
+    - git
+    - vim
+    - corporate-tools
+    - security-tools
+    - laptop-tools
+    - power-management
+  disabled:
+    - desktop-tools
+    - server-tools
+
+settings:
+  laptop_mode: true
+  power_management: true
+  wifi_priority: true
+
+user:
+  hostname: "work-laptop"
+  device_type: "laptop"
+
+# Laptop-specific shell configuration
+shell:
+  aliases:
+    battery: "pmset -g batt"
+    wifi: "networksetup -listallhardwareports"
+    sleep: "pmset sleepnow"
+  
+  exports:
+    LAPTOP_MODE: "true"
+
+# Laptop-specific power settings (macOS example)
+macos:
+  power:
+    displaysleep: 10
+    disksleep: 10
+    sleep: 30

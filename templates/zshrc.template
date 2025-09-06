@@ -1,0 +1,65 @@
+# ZSH Configuration Template
+# Demonstrates environment-specific configuration
+
+# Environment detection
+export DOTFILES_ENV="{{DOTFILES_ENV|personal}}"
+
+{{#if WORK_ENV}}
+# Work environment specific settings
+export COMPANY_NAME="{{COMPANY_NAME}}"
+export WORK_EMAIL="{{WORK_EMAIL}}"
+
+# Work-specific aliases
+alias vpn-connect="sudo openconnect {{VPN_SERVER}}"
+alias work-ssh="ssh {{WORK_USERNAME}}@{{WORK_SERVER}}"
+{{/if}}
+
+# Shell options
+setopt AUTO_CD
+setopt CORRECT
+{{#if ENABLE_HISTORY_SHARING}}
+setopt SHARE_HISTORY
+{{/if}}
+
+# History configuration
+HISTSIZE={{HISTSIZE|10000}}
+SAVEHIST={{SAVEHIST|10000}}
+HISTFILE=~/.zsh_history
+
+# Prompt configuration
+{{#if CUSTOM_PROMPT}}
+# Custom prompt
+PS1="{{CUSTOM_PROMPT}}"
+{{else}}
+# Default prompt
+PS1="%n@%m:%~$ "
+{{/if}}
+
+# Load additional configurations
+{{#each ZSH_PLUGINS}}
+# Loading plugin: {{this}}
+source ~/.oh-my-zsh/plugins/{{this}}/{{this}}.plugin.zsh
+{{/each}}
+
+{{#if ENABLE_AUTOSUGGESTIONS}}
+# Enable autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+{{/if}}
+
+# Platform-specific configurations
+case "$(uname -s)" in
+    Darwin)
+        # macOS specific settings
+        export BROWSER="{{MACOS_BROWSER|open}}"
+        {{#if HOMEBREW_PREFIX}}
+        export PATH="{{HOMEBREW_PREFIX}}/bin:$PATH"
+        {{/if}}
+        ;;
+    Linux)
+        # Linux specific settings
+        export BROWSER="{{LINUX_BROWSER|xdg-open}}"
+        ;;
+esac
+
+# Load local configuration if it exists
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

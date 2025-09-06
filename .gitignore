@@ -1,0 +1,385 @@
+# =============================================================================
+# OPERATING SYSTEM FILES
+# =============================================================================
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# =============================================================================
+# TEMPORARY AND EDITOR FILES
+# =============================================================================
+
+# Temporary files
+*.tmp
+*.temp
+*~
+*.swp
+*.swo
+.*.swp
+.*.swo
+
+# Vim
+*.un~
+Session.vim
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# =============================================================================
+# LOGS AND RUNTIME DATA
+# =============================================================================
+
+# Log files
+*.log
+logs/*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Keep logs directory structure but ignore log files
+!logs/.gitkeep
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# =============================================================================
+# BACKUP AND RECOVERY FILES
+# =============================================================================
+
+# Backup files
+*.backup
+*.bak
+*.orig
+backup_*
+*_backup
+*.old
+
+# Dotfiles framework backup artifacts
+backups/
+*.backup.tar.gz
+*.backup.zip
+restore_*.sh
+
+# =============================================================================
+# CONFIGURATION AND SECRETS
+# =============================================================================
+
+# Personal/sensitive configuration overrides
+config/personal.yaml
+config/private.yaml
+config/secrets.yaml
+config/local.yaml
+config/user-local.yaml
+config/overrides/local.yaml
+config/overrides/personal.yaml
+config/overrides/private.yaml
+config/overrides/*.local.yaml
+
+# Backup files with potential personal information
+config/*.backup
+config/*.backup.*
+config/user.yaml.backup*
+config/wizard-generated.yaml.backup*
+
+# User-specific configuration files that may contain personal info
+config/user-*.yaml
+config/*-personal.yaml
+config/*-private.yaml
+config/wizard-generated.yaml
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.envrc
+
+# Git configuration files that might contain personal info
+.gitconfig.local
+.gitconfig.personal
+
+# Work-specific and personal alias files (contain sensitive information)
+.aliases_work
+.aliases_local
+.aliases_personal
+*_work_aliases
+*_personal_aliases
+aliases_work_*
+aliases_personal_*
+
+# =============================================================================
+# CACHE AND TEMPORARY DIRECTORIES
+# =============================================================================
+
+# Cache directories
+.cache/
+cache/downloads/*
+cache/platform/*
+cache/updates/*
+*.cache
+
+# Keep cache directory structure
+!cache/.gitkeep
+!cache/downloads/.gitkeep
+!cache/platform/.gitkeep
+!cache/updates/.gitkeep
+
+# =============================================================================
+# IDE AND EDITOR FILES
+# =============================================================================
+
+# VSCode
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+.vscode/tasks.json
+
+# Keep shared VSCode config
+!.vscode/recommended-extensions.json
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+# Other editors
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.settings/
+
+# =============================================================================
+# BUILD AND GENERATED FILES
+# =============================================================================
+
+# Generated files
+generated/
+build/
+dist/
+output/
+target/
+
+# =============================================================================
+# TEST ARTIFACTS
+# =============================================================================
+
+# Test results and coverage
+test-results/
+test-reports/*.xml
+test-reports/*.json
+test-reports/*.html
+coverage/
+.nyc_output/
+.coverage
+
+# Keep test-reports directory structure
+!test-reports/.gitkeep
+
+# Shell test artifacts
+*.test.log
+test_*.log
+
+# =============================================================================
+# PACKAGE MANAGERS
+# =============================================================================
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn.lock
+package-lock.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.coverage
+venv/
+env/
+
+# Ruby
+.bundle/
+vendor/bundle/
+.ruby-version
+.rbenv-version
+
+# Go
+vendor/
+
+# =============================================================================
+# PLATFORM-SPECIFIC PACKAGE MANAGERS
+# =============================================================================
+
+# Homebrew
+Brewfile.lock.json
+.brew_cache/
+
+# APT (Ubuntu/Debian)
+*.deb.cache
+
+# YUM/DNF (RedHat/CentOS/Amazon Linux)
+*.rpm.cache
+
+# =============================================================================
+# SHELL AND DOTFILES SPECIFIC
+# =============================================================================
+
+# Shell history files that might accidentally get copied
+.bash_history
+.zsh_history
+.fish_history
+
+# Shell completion cache
+.zcompdump*
+.bash_completion_cache
+
+# Installation and migration artifacts
+install.log
+installation.log
+*.install.log
+migration_*.log
+rollback_*.log
+
+# Symlink artifacts
+*.symlink
+
+# Platform detection cache
+.platform_cache
+.detected_platform
+
+# Module installation state
+.module_state
+.installed_modules
+
+# =============================================================================
+# SECURITY AND CREDENTIALS
+# =============================================================================
+
+# SSH keys and certificates
+ssh_keys/
+gpg_keys/
+certificates/
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+id_ecdsa*
+known_hosts*
+
+# GPG
+.gnupg/
+*.gpg
+*.asc
+
+# =============================================================================
+# USER-SPECIFIC OVERRIDES
+# =============================================================================
+
+# Platform-specific generated configs
+.config/
+.local/
+
+# User-specific customizations that shouldn't be committed
+local/
+personal/
+custom/
+user-*
+
+# Files that may contain personal information
+**/user.yaml.backup*
+**/wizard-generated.yaml.backup*
+**/*-personal.*
+**/*-private.*
+**/my-*
+**/personal-*
+**/private-*
+
+# Common files that accidentally get committed with personal info
+.bash_profile.local
+.zshrc.local
+.vimrc.local
+.tmux.conf.local
+
+# =============================================================================
+# DEVELOPMENT AND DEBUGGING
+# =============================================================================
+
+# Debug files
+*.debug
+debug.log
+trace.log
+
+# Performance profiling
+*.prof
+*.trace
+
+# Core dumps (but not the core/ directory)
+core.dump
+core.[0-9]*
+*.core
+
+# =============================================================================
+# ANSIBLE AND AUTOMATION
+# =============================================================================
+
+# Ansible artifacts
+*.retry
+.ansible/
+ansible.log
+
+# =============================================================================
+# KIRO IDE FILES
+# =============================================================================
+
+# Kiro IDE workspace files
+.kiro/
+
+# =============================================================================
+# MISC
+# =============================================================================
+
+# Compressed files that might be created during operations
+*.tar.gz
+*.zip
+*.7z
+*.rar
+
+# Lock files
+*.lock
+
+# Temporary directories
+tmp/
+temp/

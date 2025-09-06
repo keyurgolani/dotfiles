@@ -1,0 +1,14 @@
+modules:
+  enabled:
+    - shell
+    - git
+    - vim
+  disabled:
+    - docker
+settings:
+  backup_enabled: true
+  interactive_mode: false
+user:
+  name: "Test User"
+  email: "test@example.com"
+  github_username: "testuser"

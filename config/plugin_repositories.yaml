@@ -1,0 +1,27 @@
+# Plugin Repositories Configuration
+# Define third-party plugin repositories here
+
+repositories:
+  # Official dotfiles plugins repository
+  - name: "official"
+    url: "https://github.com/dotfiles-framework/plugins.git"
+    branch: "main"
+    enabled: true
+    trusted: true
+    description: "Official dotfiles framework plugins"
+  
+  # Community plugins repository
+  - name: "community"
+    url: "https://github.com/dotfiles-community/plugins.git"
+    branch: "main"
+    enabled: false
+    trusted: false
+    description: "Community contributed plugins"
+
+# Plugin installation settings
+settings:
+  auto_update: false
+  update_interval_days: 7
+  verify_signatures: true
+  allow_untrusted: false
+  max_concurrent_downloads: 3

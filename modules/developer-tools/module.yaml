@@ -1,0 +1,18 @@
+name: "developer-tools"
+version: "1.0.0"
+description: "Development tools and environment setup for macOS"
+category: "development"
+dependencies: ["homebrew"]
+platforms:
+  - macos
+packages:
+  macos:
+    - node
+    - python
+    - java
+    - docker
+    - postman
+    - visual-studio-code
+    - intellij-idea
+    - xcode
+files: []

@@ -1,0 +1,52 @@
+# Base configuration for inheritance
+# This serves as a foundation that other configurations can extend
+
+modules:
+  enabled:
+    - shell
+    - git
+    - vim
+  disabled: []
+
+settings:
+  backup_enabled: true
+  backup_retention_days: 30
+  interactive_mode: true
+  parallel_installation: false
+
+# Performance optimization settings
+performance:
+  enable_progress_indicators: true
+  enable_parallel_installation: true
+  enable_download_cache: true
+  enable_platform_cache: true
+  shell_startup_optimization: true
+  cache_cleanup_on_exit: false
+  max_parallel_jobs: 4
+  cache_ttl_seconds: 3600
+
+user:
+  name: ""
+  email: ""
+  github_username: ""
+
+# Default shell configuration
+shell:
+  aliases:
+    ls: "ls --color=auto"
+    la: "ls -la"
+    ll: "ls -l"
+  
+  exports:
+    EDITOR: "vim"
+    PAGER: "less"
+
+# Default git configuration
+git:
+  core:
+    autocrlf: false
+    editor: "${EDITOR}"
+  push:
+    default: "simple"
+  pull:
+    rebase: false

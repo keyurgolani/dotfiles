@@ -1,0 +1,31 @@
+# Conditional override for corporate network environment
+# This configuration is applied when corporate directory exists
+
+condition: "test -d /opt/corporate || test -d /usr/local/corporate"
+
+overrides:
+  modules:
+    enabled:
+      - corporate-proxy
+      - enterprise-security
+      - company-tools
+    disabled:
+      - personal-cloud-sync
+  
+  settings:
+    corporate_network: true
+    proxy_required: true
+    security_enhanced: true
+  
+  # Corporate network specific configurations
+  git:
+    http:
+      proxy: "${CORPORATE_PROXY:-}"
+    https:
+      proxy: "${CORPORATE_PROXY:-}"
+  
+  shell:
+    exports:
+      HTTP_PROXY: "${CORPORATE_PROXY:-}"
+      HTTPS_PROXY: "${CORPORATE_PROXY:-}"
+      NO_PROXY: "localhost,127.0.0.1,*.local,*.corporate"

@@ -1,0 +1,17 @@
+name: "Ubuntu"
+package_manager: "apt"
+shell: "/bin/bash"
+dependencies:
+  - curl
+  - wget
+  - git
+package_commands:
+  install: "sudo apt install -y"
+  update: "sudo apt update && sudo apt upgrade -y"
+  search: "apt search"
+paths:
+  config: "~/.config"
+  local: "~/.local"
+  bin: "/usr/local/bin"
+system_preferences:
+  enabled: false

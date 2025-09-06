@@ -1,0 +1,46 @@
+# Work environment configuration that extends base
+# This demonstrates configuration inheritance
+
+extends: "base.yaml"
+
+modules:
+  enabled:
+    - shell
+    - git
+    - vim
+    - corporate-tools
+    - security-tools
+  disabled:
+    - personal-tools
+    - gaming-tools
+
+settings:
+  backup_enabled: true
+  backup_retention_days: 90  # Longer retention for work
+  security_enhanced: true
+  corporate_compliance: true
+
+user:
+  work_environment: true
+  corporate_email: "${WORK_EMAIL}"
+
+# Work-specific shell configuration
+shell:
+  aliases:
+    work: "cd ${WORK_WORKSPACE:-$HOME/work}"
+    vpn: "sudo openvpn --config /etc/openvpn/corporate.ovpn"
+  
+  exports:
+    WORK_WORKSPACE: "${WORK_WORKSPACE:-$HOME/work}"
+    CORPORATE_PROXY: "${CORPORATE_PROXY:-}"
+
+# Work-specific git configuration
+git:
+  user:
+    email: "${WORK_EMAIL}"
+    signingkey: "${WORK_GPG_KEY}"
+  commit:
+    gpgsign: true
+  url:
+    "git@github-work:":
+      insteadOf: "git@github.com:"
